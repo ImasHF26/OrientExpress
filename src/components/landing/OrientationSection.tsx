@@ -8,9 +8,6 @@ import {
   Phone,
   ArrowRight,
   CheckCircle2,
-  School,
-  Heart,
-  MapPin,
   Loader2,
   Database,
 } from 'lucide-react'
@@ -47,8 +44,8 @@ export default function OrientationSection() {
     telephone: '',
     niveau: '',
     filiere: '',
-    interet: '',
-    etablissement: '',
+    interet: 'Général / Non spécifié',
+    etablissement: 'Non spécifié',
   })
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -61,7 +58,6 @@ export default function OrientationSection() {
       const schoolAcronym = customEvent.detail as string
       if (schoolAcronym) {
         setFormData((prev) => ({ ...prev, etablissement: schoolAcronym }))
-        setCurrentStep(3) // Aller directement à l'étape établissement
       }
     }
     window.addEventListener('preselect-school', handler)
@@ -77,11 +73,10 @@ export default function OrientationSection() {
       case 0:
         return formData.nom.trim() !== '' && formData.telephone.trim() !== ''
       case 1:
-        return formData.niveau !== '' && formData.filiere !== ''
-      case 2:
-        return formData.interet !== ''
-      case 3:
-        return formData.etablissement !== ''
+        if (formData.niveau === 'Bac') {
+          return formData.filiere !== ''
+        }
+        return formData.niveau !== ''
       default:
         return false
     }
@@ -92,10 +87,14 @@ export default function OrientationSection() {
     setSubmitError('')
 
     try {
+      const payload = {
+        ...formData,
+        filiere: formData.filiere || 'Non spécifiée',
+      }
       const res = await fetch('/api/inscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       const data = await res.json()
@@ -115,8 +114,6 @@ export default function OrientationSection() {
   const steps = [
     { title: 'Vos informations', icon: ClipboardList },
     { title: 'Votre parcours', icon: GraduationCap },
-    { title: 'Vos intérêts', icon: Heart },
-    { title: 'Établissement', icon: School },
   ]
 
   if (submitted) {
@@ -170,15 +167,7 @@ export default function OrientationSection() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Filière :</span>
-                <span className="font-semibold text-gray-900">{formData.filiere}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Intérêt :</span>
-                <span className="font-semibold text-gray-900">{formData.interet}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Établissement :</span>
-                <span className="font-semibold text-blue-700">{formData.etablissement}</span>
+                <span className="font-semibold text-gray-900">{formData.filiere || 'Non spécifiée'}</span>
               </div>
             </div>
           </motion.div>
@@ -190,7 +179,7 @@ export default function OrientationSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(`Bonjour, je suis ${formData.nom} (${formData.telephone}). Je viens de valider ma demande pour l'établissement ${formData.etablissement}.`)}`}
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(`Bonjour, je suis ${formData.nom} (${formData.telephone}). Je viens de valider ma demande d'orientation sur CAP FUTURE MAROC (Niveau : ${formData.niveau}, Filière : ${formData.filiere || 'Non spécifiée'}).`)}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -214,8 +203,8 @@ export default function OrientationSection() {
                   telephone: '',
                   niveau: '',
                   filiere: '',
-                  interet: '',
-                  etablissement: '',
+                  interet: 'Général / Non spécifié',
+                  etablissement: 'Non spécifié',
                 })
               }}
             >
@@ -359,13 +348,15 @@ export default function OrientationSection() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label className="font-semibold text-gray-700">Filière d&apos;origine *</Label>
+                      <Label className="font-semibold text-gray-700">
+                        Filière d&apos;origine {formData.niveau === 'Bac' ? '*' : '(Optionnelle)'}
+                      </Label>
                       <Select
                         value={formData.filiere}
                         onValueChange={(v) => updateField('filiere', v)}
                       >
                         <SelectTrigger className="h-12 text-base rounded-xl border-gray-200">
-                          <SelectValue placeholder="Sélectionne ta filière" />
+                          <SelectValue placeholder={formData.niveau === 'Bac' ? "Sélectionne ta filière" : "Sélectionne ta filière (Optionnelle)"} />
                         </SelectTrigger>
                         <SelectContent>
                           {FORM_OPTIONS.filieres.map((f) => (
@@ -380,93 +371,7 @@ export default function OrientationSection() {
                 </div>
               )}
 
-              {/* Step 2: Interests */}
-              {currentStep === 2 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
-                      Spécialités & Domaines d&apos;Intérêts
-                    </h3>
-                    <p className="text-gray-550 text-sm">
-                      Quel domaine d&apos;activité t&apos;attire le plus pour ton avenir ?
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {FORM_OPTIONS.interets.map((interet) => (
-                      <button
-                        key={interet}
-                        type="button"
-                        onClick={() => updateField('interet', interet)}
-                        className={`p-4 rounded-xl border-2 text-sm font-semibold transition-all duration-200 text-left ${
-                          formData.interet === interet
-                            ? 'border-blue-600 bg-blue-50/50 text-blue-800 shadow-sm'
-                            : 'border-gray-200 bg-white text-gray-700 hover:border-blue-200 hover:bg-blue-50/20'
-                        }`}
-                      >
-                        {interet}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
 
-              {/* Step 3: School Selection */}
-              {currentStep === 3 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
-                      Ton établissement préféré
-                    </h3>
-                    <p className="text-gray-550 text-sm">
-                      Quel établissement public de la région t&apos;intéresse le plus ?
-                    </p>
-                  </div>
-                  <div className="space-y-3">
-                    {FORM_OPTIONS.etablissements.map((etab) => (
-                      <button
-                        key={etab}
-                        type="button"
-                        onClick={() =>
-                          updateField('etablissement', etab)
-                        }
-                        className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-200 text-left ${
-                          formData.etablissement === etab
-                            ? 'border-blue-600 bg-blue-50/40 shadow-sm'
-                            : 'border-gray-200 bg-white hover:border-blue-200 hover:bg-blue-50/20'
-                        }`}
-                      >
-                        <div
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-black text-white ${
-                            formData.etablissement === etab
-                              ? 'bg-blue-600 shadow'
-                              : 'bg-gray-300'
-                          }`}
-                        >
-                          {etab.charAt(0)}
-                        </div>
-                        <div className="flex-1">
-                          <p
-                            className={`font-bold text-sm ${
-                              formData.etablissement === etab
-                                ? 'text-blue-800'
-                                : 'text-gray-900'
-                            }`}
-                          >
-                            {etab}
-                          </p>
-                          <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
-                            <MapPin className="w-3 h-3 text-blue-500" />
-                            {SCHOOLS.find((s) => s.acronym === etab)?.city || 'Rabat-Salé-Kénitra'}
-                          </p>
-                        </div>
-                        {formData.etablissement === etab && (
-                          <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 animate-bounce" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Error message */}
               {submitError && (
