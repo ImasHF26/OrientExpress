@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   region: 'Rabat-Salé-Kénitra',
   whatsappNumber: '212666763438', // Numéro WhatsApp (sans +)
   phoneNumber: '+212 6 66 76 34 38', // Numéro de téléphone affiché
-  email: 'contact@orientexpress.ma',
+  email: 'abdelouahab069@gmail.com',
   address: 'Rabat-Salé-Kénitra, Maroc',
   hours: 'Lun - Sam : 9h00 - 18h00',
 } as const
