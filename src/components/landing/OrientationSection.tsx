@@ -333,7 +333,13 @@ export default function OrientationSection() {
                       <Label className="font-semibold text-gray-700">Niveau d&apos;étude actuel *</Label>
                       <Select
                         value={formData.niveau}
-                        onValueChange={(v) => updateField('niveau', v)}
+                        onValueChange={(v) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            niveau: v,
+                            filiere: '',
+                          }))
+                        }}
                       >
                         <SelectTrigger className="h-12 text-base rounded-xl border-gray-200">
                           <SelectValue placeholder="Sélectionne ton niveau" />
@@ -348,24 +354,34 @@ export default function OrientationSection() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label className="font-semibold text-gray-700">
+                      <Label htmlFor="filiere" className="font-semibold text-gray-700">
                         Filière d&apos;origine {formData.niveau === 'Bac' ? '*' : '(Optionnelle)'}
                       </Label>
-                      <Select
-                        value={formData.filiere}
-                        onValueChange={(v) => updateField('filiere', v)}
-                      >
-                        <SelectTrigger className="h-12 text-base rounded-xl border-gray-200">
-                          <SelectValue placeholder={formData.niveau === 'Bac' ? "Sélectionne ta filière" : "Sélectionne ta filière (Optionnelle)"} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {FORM_OPTIONS.filieres.map((f) => (
-                            <SelectItem key={f} value={f}>
-                              {f}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      {formData.niveau === 'Bac' ? (
+                        <Select
+                          value={formData.filiere}
+                          onValueChange={(v) => updateField('filiere', v)}
+                        >
+                          <SelectTrigger className="h-12 text-base rounded-xl border-gray-200">
+                            <SelectValue placeholder="Sélectionne ta filière" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {FORM_OPTIONS.filieres.map((f) => (
+                              <SelectItem key={f} value={f}>
+                                {f}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <Input
+                          id="filiere"
+                          placeholder="Ex: Économie, Techniques de Management, etc. (Optionnelle)"
+                          value={formData.filiere}
+                          onChange={(e) => updateField('filiere', e.target.value)}
+                          className="h-12 text-base rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
