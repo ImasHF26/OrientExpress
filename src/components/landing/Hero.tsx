@@ -127,7 +127,7 @@ export default function Hero() {
                     Portail d&apos;Orientation 2026
                   </span>
                   <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
-                    Inscription Active
+                    Orientation Ouverte
                   </span>
                 </div>
 
