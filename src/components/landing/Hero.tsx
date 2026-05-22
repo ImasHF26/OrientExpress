@@ -108,7 +108,7 @@ export default function Hero() {
               <img
                 src="/banner-capfuture.png"
                 alt="CAP FUTURE MAROC Orientation"
-                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto"
+                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto lg:h-[860px] object-cover"
               />
               
               {/* Floating Prestigious Badges */}
