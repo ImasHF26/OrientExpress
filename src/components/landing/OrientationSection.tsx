@@ -228,7 +228,7 @@ export default function OrientationSection() {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100/60 text-blue-800 text-sm font-semibold mb-4">
-            Inscription gratuite
+            Orientation 2026
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
             Réserve ta place pour l&apos;année prochaine

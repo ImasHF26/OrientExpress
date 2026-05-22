@@ -28,7 +28,7 @@ export default function HowItWorks() {
             3 étapes pour trouver ton établissement
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Un processus d&apos;orientation gratuit, simple et ultra-rapide pour t&apos;inscrire et réussir ton admission académique.
+            Un processus d&apos;orientation simple, personnalisé et ultra-rapide pour t&apos;inscrire et réussir ton parcours académique.
           </p>
         </motion.div>
 
@@ -47,15 +47,15 @@ export default function HowItWorks() {
               step: '02',
               title: 'Parle à un conseiller',
               description:
-                "Un conseiller pédagogique t'appelle sous 24-48h pour valider tes choix de spécialités et t'accompagner gratuitement vers la meilleure option.",
+                "Un conseiller pédagogique t'appelle sous 24-48h pour valider tes choix de spécialités et t'accompagner vers la meilleure option.",
               icon: '💬',
               color: 'from-amber-500 to-orange-600',
             },
             {
               step: '03',
-              title: 'Prépare ton admission',
+              title: 'Prépare ton concours',
               description:
-                "Reçois tous les détails des concours d'accès, des dates limites d'inscription et des documents clés pour garantir ta place à la rentrée.",
+                "Accède aux annales, ressources exclusives et conseils méthodologiques indispensables pour maximiser tes chances de réussite aux épreuves.",
               icon: '🎓',
               color: 'from-indigo-600 to-violet-700',
             },

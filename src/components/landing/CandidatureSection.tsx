@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import {
   Building2,
-  MapPin,
   GraduationCap,
   ArrowRight,
   Phone,
@@ -82,10 +81,6 @@ export default function CandidatureSection() {
                     </div>
                     <p className="text-sm text-white/90 mt-1 leading-snug">{school.name}</p>
                     <div className="flex items-center gap-3 mt-2 text-white/80 text-xs">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        {school.city}
-                      </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {school.duree}

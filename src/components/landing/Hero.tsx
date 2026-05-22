@@ -49,7 +49,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-650 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-              ENSA, ENCG, EMI, ENSIAS, ISPITS, EST — accède aux plus prestigieux établissements de ta région et bénéficie de l&apos;accompagnement gratuit de nos conseillers experts.
+              ENCG, ENSA, ENSAM, Médecine, ISPITS, EST — accède aux plus prestigieux établissements et bénéficie de l&apos;accompagnement personnalisé de nos conseillers experts.
             </p>
 
             {/* CTAs */}
@@ -101,7 +101,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="hidden lg:block"
+            className="block mt-12 lg:mt-0 max-w-md sm:max-w-lg lg:max-w-none mx-auto w-full"
           >
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-200 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-40" />
@@ -122,7 +122,6 @@ export default function Hero() {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-gray-800">Sciences Appliquées</span>
-                  <p className="text-[10px] text-gray-400 font-semibold">Kénitra</p>
                 </div>
               </motion.div>
 
@@ -135,22 +134,20 @@ export default function Hero() {
                   ENCG
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-gray-800">Commerce & Gest.</span>
-                  <p className="text-[10px] text-gray-400 font-semibold">Kénitra</p>
+                  <span className="text-xs font-bold text-gray-800">Commerce & Gestion</span>
                 </div>
               </motion.div>
 
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 2.8, repeat: Infinity }}
-                className="absolute top-1/2 -right-6 bg-white rounded-xl shadow-xl p-3.5 border-2 border-cyan-50/80 flex items-center gap-2.5"
+                className="absolute top-1/2 -right-6 bg-white rounded-xl shadow-xl p-3.5 border-2 border-purple-50/80 flex items-center gap-2.5"
               >
-                <div className="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center font-extrabold text-cyan-700 text-sm animate-pulse">
-                  ENSIAS
+                <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center font-extrabold text-purple-700 text-sm animate-pulse">
+                  ENSAM
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-gray-800">Info. & IA</span>
-                  <p className="text-[10px] text-gray-400 font-semibold">Rabat (Irfane)</p>
+                  <span className="text-xs font-bold text-gray-800">Arts & Métiers</span>
                 </div>
               </motion.div>
             </div>

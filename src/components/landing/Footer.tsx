@@ -22,9 +22,8 @@ export default function Footer() {
               />
             </div>
             <p className="text-sm leading-relaxed mb-4 text-gray-400">
-              {SITE_CONFIG.name} — Plateforme d&apos;orientation étudiante pour la région
-              Rabat-Salé-Kénitra. ENSA, ENCG, EMI, ENSIAS, ISPITS, EST — nous
-              t&apos;accompagnons gratuitement vers le meilleur établissement public.
+              {SITE_CONFIG.name} — Plateforme d&apos;orientation étudiante.
+              ENCG, ENSA, ENSAM, Médecine, ISPITS, EST — nous t&apos;accompagnons vers le meilleur établissement public.
             </p>
           </div>
 
@@ -54,12 +53,12 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">Établissements</h4>
             <ul className="space-y-2 text-sm font-semibold">
               {[
-                { name: 'ENSA — Kénitra', color: 'text-blue-400' },
-                { name: 'ENCG — Kénitra', color: 'text-indigo-400' },
-                { name: 'EMI — Rabat', color: 'text-cyan-400' },
-                { name: 'ENSIAS — Rabat', color: 'text-emerald-400' },
-                { name: 'ISPITS — Rabat', color: 'text-teal-400' },
-                { name: 'EST — Salé', color: 'text-violet-400' },
+                { name: 'ENCG', color: 'text-amber-400' },
+                { name: 'ENSA', color: 'text-blue-400' },
+                { name: 'ENSAM', color: 'text-purple-400' },
+                { name: 'Médecine', color: 'text-rose-400' },
+                { name: 'ISPITS', color: 'text-emerald-400' },
+                { name: 'EST', color: 'text-violet-400' },
               ].map((school) => (
                 <li key={school.name} className={`${school.color}`}>
                   {school.name}
