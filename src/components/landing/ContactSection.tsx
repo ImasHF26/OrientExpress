@@ -18,7 +18,7 @@ const contactInfo = [
     label: 'WhatsApp',
     value: formatWhatsAppNumber(SITE_CONFIG.whatsappNumber),
     action: 'Démarrer une discussion',
-    href: `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Bonjour, j\'ai besoin d\'aide pour mon orientation.')}`,
+    href: `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Bonjour, je souhaite prendre rendez-vous pour mon orientation.')}`,
     color: 'from-green-500 to-emerald-600',
     textColor: 'text-green-600 group-hover:text-green-700',
     hoverShadow: 'hover:shadow-green-500/10',
@@ -60,10 +60,10 @@ export default function ContactSection() {
             Contact
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-            Une question ? Contacte-nous
+            Parle à un conseiller
           </h2>
           <p className="text-lg text-gray-650 max-w-xl mx-auto">
-            Nos conseillers pédagogiques sont disponibles pour t&apos;accompagner pas à pas dans ton projet d&apos;orientation.
+            Prends rendez-vous pour ton orientation et bénéficie d&apos;un accompagnement sur mesure pour réussir ton admission.
           </p>
         </motion.div>
 
