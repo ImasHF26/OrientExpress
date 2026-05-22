@@ -108,18 +108,7 @@ export default function Hero() {
               {/* Background glowing gradients */}
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-300 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-30 -z-10" />
 
-              {/* Mockup Header bar */}
-              <div className="flex items-center justify-between mb-4 border-b border-gray-150 pb-3">
-                <div className="flex gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded-full bg-red-400/80" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-yellow-400/80" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-green-400/80" />
-                </div>
-                <div className="text-xs font-semibold text-gray-400 bg-gray-100/85 px-4 py-1 rounded-full border border-gray-250/20">
-                  capfuture.ma/portal
-                </div>
-                <div className="w-6" /> {/* Spacer */}
-              </div>
+
 
               {/* Main Banner Image - perfectly fitted at its natural aspect ratio */}
               <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100/80 mb-5 bg-gray-50">
