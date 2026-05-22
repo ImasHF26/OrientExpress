@@ -106,9 +106,9 @@ export default function Hero() {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-200 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-40" />
               <img
-                src="/hero-illustration.png"
-                alt="Étudiant diplômé au Maroc"
-                className="relative rounded-2xl shadow-2xl border border-white/50"
+                src="/banner-capfuture.png"
+                alt="CAP FUTURE MAROC Orientation"
+                className="relative rounded-2xl shadow-2xl border border-white/50 w-full object-cover"
               />
               
               {/* Floating Prestigious Badges */}

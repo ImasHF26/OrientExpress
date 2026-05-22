@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Compass } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/config'
 
@@ -46,17 +46,15 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
             <button
               onClick={() => scrollToSection('#hero')}
               className="flex items-center gap-2 group"
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-shadow">
-                <Compass className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-              </div>
-              <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">
-                {SITE_CONFIG.name}
-              </span>
+              <img
+                src="/logo-capfuture.png"
+                alt={SITE_CONFIG.name}
+                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              />
             </button>
 
             {/* Desktop Nav */}

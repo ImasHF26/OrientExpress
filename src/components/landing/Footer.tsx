@@ -1,6 +1,6 @@
 'use client'
 
-import { Compass, Heart } from 'lucide-react'
+import { Heart } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/config'
 
 export default function Footer() {
@@ -15,10 +15,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg">
-                <Compass className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-lg font-bold text-white">{SITE_CONFIG.name}</span>
+              <img
+                src="/logo-capfuture.png"
+                alt={SITE_CONFIG.name}
+                className="h-10 w-auto object-contain"
+              />
             </div>
             <p className="text-sm leading-relaxed mb-4 text-gray-400">
               {SITE_CONFIG.name} — Plateforme d&apos;orientation étudiante pour la région
