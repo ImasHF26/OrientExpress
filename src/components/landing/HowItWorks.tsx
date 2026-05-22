@@ -47,7 +47,7 @@ export default function HowItWorks() {
               step: '02',
               title: 'Parle à un conseiller',
               description:
-                "Un conseiller pédagogique t'appelle sous 24-48h pour valider tes choix de spécialités et t'accompagner vers la meilleure option.",
+                "Prends rendez-vous pour ton orientation avec un conseiller afin de valider ton projet d'études et tes choix d'écoles.",
               icon: '💬',
               color: 'from-amber-500 to-orange-600',
             },

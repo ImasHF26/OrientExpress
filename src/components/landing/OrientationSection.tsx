@@ -141,7 +141,7 @@ export default function OrientationSection() {
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-600 mb-4"
           >
-            Ton inscription a été validée avec succès. Un conseiller de la région te contactera sous 24-48h pour t&apos;orienter.
+            Ton inscription a été validée avec succès. Un conseiller te contactera sous peu pour finaliser ton rendez-vous d&apos;orientation.
           </motion.p>
 
           {/* Summary card */}
