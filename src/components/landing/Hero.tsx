@@ -108,14 +108,14 @@ export default function Hero() {
               <img
                 src="/banner-capfuture.png"
                 alt="CAP FUTURE MAROC Orientation"
-                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto lg:h-[860px] object-cover"
+                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto lg:h-[500px] object-contain"
               />
               
               {/* Floating Prestigious Badges */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -left-4 bg-white rounded-xl shadow-xl p-3.5 border-2 border-blue-50/80 flex items-center gap-2.5"
+                className="absolute top-4 left-4 bg-white rounded-xl shadow-xl p-3 border-2 border-blue-50/80 flex items-center gap-2"
               >
                 <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center font-extrabold text-blue-700 text-sm animate-pulse">
                   ENSA
@@ -128,7 +128,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity }}
-                className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-xl p-3.5 border-2 border-amber-50/80 flex items-center gap-2.5"
+                className="absolute bottom-4 right-4 bg-white rounded-xl shadow-xl p-3 border-2 border-amber-50/80 flex items-center gap-2"
               >
                 <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center font-extrabold text-amber-700 text-sm animate-pulse">
                   ENCG
@@ -141,7 +141,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 2.8, repeat: Infinity }}
-                className="absolute top-1/2 -right-6 bg-white rounded-xl shadow-xl p-3.5 border-2 border-purple-50/80 flex items-center gap-2.5"
+                className="absolute top-1/3 right-4 bg-white rounded-xl shadow-xl p-3 border-2 border-purple-50/80 flex items-center gap-2"
               >
                 <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center font-extrabold text-purple-700 text-sm animate-pulse">
                   ENSAM
