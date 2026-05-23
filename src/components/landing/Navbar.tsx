@@ -48,13 +48,16 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             <button
               onClick={() => scrollToSection('#hero')}
-              className="flex items-center gap-2 group"
+              className="flex items-center gap-3 group"
             >
               <img
                 src="/logo-capfuture.png"
                 alt={SITE_CONFIG.name}
                 className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
+              <span className="font-extrabold text-gray-900 text-lg sm:text-xl tracking-tight">
+                CAP FUTURE MAROC
+              </span>
             </button>
 
             {/* Desktop Nav */}

@@ -101,7 +101,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-center items-center gap-4 text-center">
           <p className="text-xs text-gray-500 font-medium">
             &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. Tous droits réservés.
           </p>
