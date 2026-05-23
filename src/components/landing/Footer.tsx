@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-3">
@@ -23,8 +23,11 @@ export default function Footer() {
               <span className="font-extrabold text-white text-base tracking-tight">CAP FUTURE MAROC</span>
             </div>
             <div className="text-sm leading-relaxed mb-0 text-gray-400">
-              <p className="mb-1">
+              <p className="mb-2">
                 Ton avenir commence par le bon choix.
+              </p>
+              <p className="font-bold text-gray-300 text-xs tracking-wider mb-2">
+                ENCG • ENSA • ENSAM • Médecine • ISPITS • EST
               </p>
               <p className="font-semibold text-blue-400">
                 On t’accompagne vers ton école de rêve au Maroc.
@@ -48,25 +51,6 @@ export default function Footer() {
                   >
                     {link.label}
                   </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Établissements */}
-          <div>
-            <h4 className="text-white font-bold mb-3 text-sm uppercase tracking-wider">Établissements</h4>
-            <ul className="space-y-1.5 text-sm font-semibold">
-              {[
-                { name: 'ENCG', color: 'text-amber-400' },
-                { name: 'ENSA', color: 'text-blue-400' },
-                { name: 'ENSAM', color: 'text-purple-400' },
-                { name: 'Médecine', color: 'text-rose-400' },
-                { name: 'ISPITS', color: 'text-emerald-400' },
-                { name: 'EST', color: 'text-violet-400' },
-              ].map((school) => (
-                <li key={school.name} className={`${school.color}`}>
-                  {school.name}
                 </li>
               ))}
             </ul>
