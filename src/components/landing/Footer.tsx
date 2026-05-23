@@ -14,15 +14,15 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <img
                 src="/logo-capfuture.png"
                 alt={SITE_CONFIG.name}
                 className="h-10 w-auto object-contain"
               />
+              <span className="font-extrabold text-white text-base tracking-tight">CAP FUTURE MAROC 🎓</span>
             </div>
             <div className="text-sm leading-relaxed mb-4 text-gray-400">
-              <span className="font-extrabold text-white text-base block mb-2">CAP FUTURE MAROC 🎓</span>
               <p className="mb-2">
                 Ton avenir commence par le bon choix.
               </p>
