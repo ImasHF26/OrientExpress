@@ -231,10 +231,10 @@ export default function OrientationSection() {
             Orientation 2026
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-            Réserve ta place pour l&apos;année prochaine
+            Commence ton orientation dès aujourd’hui
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Remplis notre formulaire intelligent en quelques étapes rapides et sécurise ton orientation dans ta région.
+            Complète le formulaire en quelques minutes et bénéficie d’un accompagnement personnalisé pour préparer ton avenir sereinement.
           </p>
         </motion.div>
 
