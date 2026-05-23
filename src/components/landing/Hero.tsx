@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, GraduationCap, Users, MapPin, Trophy } from 'lucide-react'
+import { ArrowRight, GraduationCap, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default function Hero() {
@@ -83,28 +83,6 @@ export default function Hero() {
                 Contacter un conseiller
               </Button>
             </div>
-
-            {/* Premium Stats Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex gap-10 mt-12 justify-center lg:justify-start border-t border-gray-200/50 pt-8"
-            >
-              {[
-                { icon: Users, value: '6', label: 'Grandes Écoles' },
-                { icon: MapPin, value: 'RSK', label: 'Région Couverte' },
-                { icon: Trophy, value: '98%', label: 'Taux de Réussite' },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <div className="flex items-center gap-2 justify-center lg:justify-start">
-                    <stat.icon className="w-5 h-5 text-blue-600" />
-                    <span className="text-2xl font-black text-gray-900">{stat.value}</span>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">{stat.label}</p>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Right Column: Premium Banner Display */}
