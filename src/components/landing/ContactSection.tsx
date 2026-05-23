@@ -63,7 +63,7 @@ export default function ContactSection() {
             Parle à un conseiller
           </h2>
           <p className="text-lg text-gray-650 max-w-xl mx-auto">
-            Prends rendez-vous pour ton orientation et bénéficie d&apos;un accompagnement sur mesure pour réussir ton admission.
+            Prends rendez-vous avec un conseiller et bénéficie d’un accompagnement personnalisé pour réussir ton orientation et ton admission.
           </p>
         </motion.div>
 
