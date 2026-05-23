@@ -21,10 +21,15 @@ export default function Footer() {
                 className="h-10 w-auto object-contain"
               />
             </div>
-            <p className="text-sm leading-relaxed mb-4 text-gray-400">
-              {SITE_CONFIG.name} — Plateforme d&apos;orientation étudiante.
-              ENCG, ENSA, ENSAM, Médecine, ISPITS, EST — nous t&apos;accompagnons vers le meilleur établissement public.
-            </p>
+            <div className="text-sm leading-relaxed mb-4 text-gray-400">
+              <span className="font-extrabold text-white text-base block mb-1">CAP FUTURE MAROC 🎓</span>
+              Ton avenir commence par le bon choix.
+              <br />
+              <br />
+              <span className="font-bold text-gray-300 text-xs tracking-wider block">ENCG • ENSA • ENSAM • Médecine • ISPITS • EST</span>
+              <br />
+              On t’accompagne vers ton école de rêve au Maroc.
+            </div>
           </div>
 
           {/* Navigation */}
