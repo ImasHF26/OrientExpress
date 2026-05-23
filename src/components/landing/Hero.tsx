@@ -48,9 +48,20 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-gray-650 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-              ENCG, ENSA, ENSAM, Médecine, ISPITS, EST — accède aux plus prestigieux établissements et bénéficie de l&apos;accompagnement personnalisé de nos conseillers experts.
-            </p>
+            <div className="text-lg sm:text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+              <span className="text-gray-900 font-extrabold text-xl sm:text-2xl block mb-1">
+                Construis ton avenir dès aujourd’hui
+              </span>
+              <span className="text-blue-600 font-bold block mb-2 text-base sm:text-lg">
+                Orientation &amp; Accompagnement Personnalisé
+              </span>
+              <span className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent font-black block mb-4 tracking-wide text-sm sm:text-base uppercase border-y border-gray-100 py-1.5 inline-block">
+                ENCG • ENSA • ENSAM • Médecine • ISPITS • EST
+              </span>
+              <p className="text-sm sm:text-base text-gray-500 font-normal leading-relaxed">
+                Profite d’un accompagnement stratégique avec nos conseillers experts pour faire les meilleurs choix d’orientation et maximiser tes chances de réussite.
+              </p>
+            </div>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
