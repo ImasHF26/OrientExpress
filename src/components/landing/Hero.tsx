@@ -107,82 +107,23 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Sophisticated App/Dashboard Mockup */}
+          {/* Right Column: Premium Banner Display */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="block mt-12 lg:mt-0 max-w-lg lg:max-w-none mx-auto w-full"
           >
-            {/* Elegant glassmorphic device frame */}
-            <div className="relative bg-white/60 backdrop-blur-xl border border-white/80 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-indigo-100/50">
-              {/* Background glowing gradients */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-300 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-30 -z-10" />
-
-
+            <div className="relative">
+              {/* Premium Background glowing gradients */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-300 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-35" />
 
               {/* Main Banner Image - perfectly fitted at its natural aspect ratio */}
-              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100/80 mb-5 bg-gray-50">
-                <img
-                  src="/banner-capfuture.png"
-                  alt="CAP FUTURE MAROC Orientation"
-                  className="w-full h-auto object-contain block"
-                />
-              </div>
-
-              {/* Interactive Features / Information Board */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-gray-800 flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                    Portail d&apos;Orientation 2026
-                  </span>
-                  <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
-                    Orientation Ouverte
-                  </span>
-                </div>
-
-                {/* Grid of Prestigious School Cards */}
-                <div className="grid grid-cols-3 gap-2.5">
-                  {[
-                    { code: 'ENSA', name: 'Ingénierie', color: 'bg-blue-50/70 text-blue-700 border-blue-100/60' },
-                    { code: 'ENCG', name: 'Management', color: 'bg-amber-50/70 text-amber-700 border-amber-100/60' },
-                    { code: 'ENSAM', name: 'Arts & Métiers', color: 'bg-purple-50/70 text-purple-700 border-purple-100/60' },
-                    { code: 'Médecine', name: 'Santé', color: 'bg-emerald-50/70 text-emerald-700 border-emerald-100/60' },
-                    { code: 'ISPITS', name: 'Paramédical', color: 'bg-rose-50/70 text-rose-700 border-rose-100/60' },
-                    { code: 'EST', name: 'Technologie', color: 'bg-indigo-50/70 text-indigo-700 border-indigo-100/60' },
-                  ].map((school, i) => (
-                    <motion.div
-                      key={school.code}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 + i * 0.05 }}
-                      className={`p-2.5 rounded-xl border text-center ${school.color} hover:scale-[1.03] transition-transform duration-300 shadow-sm cursor-default`}
-                    >
-                      <div className="font-extrabold text-xs sm:text-sm">{school.code}</div>
-                      <div className="text-[9px] font-semibold opacity-80 mt-0.5">{school.name}</div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Dashboard bottom stats */}
-                <div className="bg-gradient-to-r from-blue-50/50 to-indigo-50/50 border border-blue-100/30 rounded-2xl p-3.5 flex justify-between items-center text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">📈</span>
-                    <div>
-                      <div className="font-bold text-gray-800">98% Taux d&apos;Admission</div>
-                      <div className="text-[10px] text-gray-500 font-medium">Préparation certifiée</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">🎯</span>
-                    <div>
-                      <div className="font-bold text-gray-800">Accompagnement 1:1</div>
-                      <div className="text-[10px] text-indigo-600 font-semibold uppercase">Conseillers Experts</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img
+                src="/banner-capfuture.png"
+                alt="CAP FUTURE MAROC Orientation"
+                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto object-contain block"
+              />
             </div>
           </motion.div>
         </div>
