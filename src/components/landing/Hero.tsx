@@ -22,25 +22,27 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* National Trust Badge */}
+        <div className="flex justify-center lg:justify-start mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100/60 text-blue-800 text-sm font-semibold shadow-sm"
+          >
+            <MapPin className="w-4 h-4 text-blue-600" />
+            Région Rabat-Salé-Kénitra — Orientation Nationale
+          </motion.div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:items-stretch items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-center lg:text-left"
+            className="text-center lg:text-left flex flex-col justify-center"
           >
-            {/* National Trust Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100/60 text-blue-800 text-sm font-semibold mb-6 shadow-sm"
-            >
-              <MapPin className="w-4 h-4 text-blue-600" />
-              Région Rabat-Salé-Kénitra — Orientation Nationale
-            </motion.div>
-
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 tracking-tight">
               Ton avenir commence{' '}
               <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-amber-600 bg-clip-text text-transparent">
@@ -90,17 +92,17 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="block mt-12 lg:mt-0 max-w-lg lg:max-w-none mx-auto w-full"
+            className="block mt-12 lg:mt-0 max-w-lg lg:max-w-none mx-auto w-full lg:h-full"
           >
-            <div className="relative">
+            <div className="relative lg:h-full flex items-stretch">
               {/* Premium Background glowing gradients */}
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-300 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-35" />
 
-              {/* Main Banner Image - perfectly fitted at its natural aspect ratio */}
+              {/* Main Banner Image - perfectly fitted to take exactly the vertical space matching the left content height */}
               <img
                 src="/banner-capfuture.png"
                 alt="CAP FUTURE MAROC Orientation"
-                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto object-contain block"
+                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto lg:h-full object-cover block"
               />
             </div>
           </motion.div>
