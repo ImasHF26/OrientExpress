@@ -1,6 +1,6 @@
 'use client'
 
-import { Heart } from 'lucide-react'
+
 import { SITE_CONFIG } from '@/lib/config'
 
 export default function Footer() {
@@ -20,7 +20,7 @@ export default function Footer() {
                 alt={SITE_CONFIG.name}
                 className="h-10 w-auto object-contain"
               />
-              <span className="font-extrabold text-white text-base tracking-tight">CAP FUTURE MAROC 🎓</span>
+              <span className="font-extrabold text-white text-base tracking-tight">CAP FUTURE MAROC</span>
             </div>
             <div className="text-sm leading-relaxed mb-4 text-gray-400">
               <p className="mb-2">
@@ -105,9 +105,7 @@ export default function Footer() {
           <p className="text-xs text-gray-500 font-medium">
             &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. Tous droits réservés.
           </p>
-          <p className="flex items-center gap-1 text-xs text-gray-500 font-semibold">
-            Fait avec <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> pour les étudiants de {SITE_CONFIG.region}
-          </p>
+
         </div>
       </div>
     </footer>
