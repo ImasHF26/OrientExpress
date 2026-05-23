@@ -35,13 +35,13 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:items-stretch items-center">
+        <div className="grid lg:grid-cols-12 gap-12 lg:items-stretch items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-center lg:text-left flex flex-col justify-center"
+            className="text-center lg:text-left flex flex-col justify-center lg:col-span-5"
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 tracking-tight">
               Ton avenir commence{' '}
@@ -92,17 +92,17 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="block mt-12 lg:mt-0 max-w-lg lg:max-w-none mx-auto w-full lg:h-full"
+            className="block mt-12 lg:mt-0 max-w-lg lg:max-w-none mx-auto w-full lg:col-span-7 lg:h-full"
           >
-            <div className="relative lg:h-full flex items-stretch">
+            <div className="relative lg:h-full flex items-center justify-center">
               {/* Premium Background glowing gradients */}
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-300 via-indigo-200 to-amber-200 rounded-3xl blur-2xl opacity-35" />
 
-              {/* Main Banner Image - perfectly fitted to take exactly the vertical space matching the left content height */}
+              {/* Main Banner Image - perfectly fitted and never cropped */}
               <img
                 src="/banner-capfuture.png"
                 alt="CAP FUTURE MAROC Orientation"
-                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto lg:h-full object-cover block"
+                className="relative rounded-2xl shadow-2xl border border-white/50 w-full h-auto object-contain block"
               />
             </div>
           </motion.div>
