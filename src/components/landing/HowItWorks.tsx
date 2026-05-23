@@ -39,15 +39,15 @@ export default function HowItWorks() {
               step: '01',
               title: 'Remplis le formulaire',
               description:
-                'Indique ton niveau (Bac, Bac+1...), tes préférences de filière et l\'établissement de ton choix. Tes choix sont sauvegardés instantanément.',
+                'Indique ton niveau d’études, tes objectifs et les filières qui t’intéressent. Nous analysons ton profil pour t’orienter vers les meilleurs choix.',
               icon: '📝',
               color: 'from-blue-600 to-indigo-700',
             },
             {
               step: '02',
-              title: 'Parle à un conseiller',
+              title: 'Échange avec un conseiller',
               description:
-                "Prends rendez-vous pour ton orientation avec un conseiller afin de valider ton projet d'études et tes choix d'écoles.",
+                'Bénéficie d’un accompagnement personnalisé avec un conseiller d’orientation pour construire un projet d’études clair et adapté à ton avenir.',
               icon: '💬',
               color: 'from-amber-500 to-orange-600',
             },
@@ -55,7 +55,7 @@ export default function HowItWorks() {
               step: '03',
               title: 'Prépare ton concours',
               description:
-                "Accède aux annales, ressources exclusives et conseils méthodologiques indispensables pour maximiser tes chances de réussite aux épreuves.",
+                'Accède à des ressources, conseils et méthodes efficaces pour réussir tes concours et maximiser tes chances d’intégrer l’école de ton choix.',
               icon: '🎓',
               color: 'from-indigo-600 to-violet-700',
             },
