@@ -22,13 +22,13 @@ export default function Footer() {
               />
             </div>
             <div className="text-sm leading-relaxed mb-4 text-gray-400">
-              <span className="font-extrabold text-white text-base block mb-1">CAP FUTURE MAROC 🎓</span>
-              Ton avenir commence par le bon choix.
-              <br />
-              <br />
-              <span className="font-bold text-gray-300 text-xs tracking-wider block">ENCG • ENSA • ENSAM • Médecine • ISPITS • EST</span>
-              <br />
-              On t’accompagne vers ton école de rêve au Maroc.
+              <span className="font-extrabold text-white text-base block mb-2">CAP FUTURE MAROC 🎓</span>
+              <p className="mb-2">
+                Ton avenir commence par le bon choix.
+              </p>
+              <p className="font-semibold text-blue-400">
+                On t’accompagne vers ton école de rêve au Maroc.
+              </p>
             </div>
           </div>
 
