@@ -45,7 +45,7 @@ export default function Hero() {
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 tracking-tight">
               Ton avenir commence{' '}
-              <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-amber-600 bg-clip-text text-transparent">
+              <span className="text-blue-700">
                 ici
               </span>
             </h1>
@@ -80,7 +80,7 @@ export default function Hero() {
                 onClick={() => scrollTo('#contact')}
                 size="lg"
                 variant="outline"
-                className="border-2 border-amber-300 text-amber-850 hover:bg-amber-50 hover:border-amber-400 transition-all duration-300 text-base px-8 py-6 rounded-xl font-bold"
+                className="border-2 border-blue-200 text-blue-800 hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 text-base px-8 py-6 rounded-xl font-bold"
               >
                 Contacter un conseiller
               </Button>
