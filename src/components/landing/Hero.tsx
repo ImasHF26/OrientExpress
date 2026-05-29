@@ -45,21 +45,21 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="text-center lg:text-left flex flex-col justify-center lg:col-span-5"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] mb-6 tracking-tight">
-              Ton avenir commence{' '}
-              <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent block mt-2 font-black">
-                ici et maintenant.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-slate-800 leading-[1.15] mb-6 tracking-tight">
+              Ton avenir{' '}
+              <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-indigo-800 bg-clip-text text-transparent font-extrabold block mt-2">
+                commence ici.
               </span>
             </h1>
 
-            <div className="text-lg sm:text-xl text-slate-650 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-              <span className="text-slate-900 font-extrabold text-xl sm:text-2xl block mb-2">
-                Construis ton avenir dès aujourd’hui
-              </span>
-              <span className="text-indigo-650 font-bold block mb-4 text-base sm:text-lg">
+            <div className="text-lg sm:text-xl text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+              <span className="text-indigo-600 font-semibold block mb-2 text-sm sm:text-base uppercase tracking-wider">
                 Orientation &amp; Accompagnement Personnalisé
               </span>
-              <span className="bg-gradient-to-r from-violet-600 to-indigo-650 text-white font-extrabold block mb-6 tracking-wider text-xs sm:text-sm uppercase py-2 px-4 rounded-xl shadow-md shadow-indigo-500/10 inline-block">
+              <span className="text-slate-800 font-semibold text-lg sm:text-xl block mb-4">
+                Construis ton avenir dès aujourd’hui
+              </span>
+              <span className="bg-gradient-to-r from-violet-600 to-indigo-800 text-white font-bold block mb-6 tracking-wider text-xs sm:text-sm uppercase py-2 px-4 rounded-xl shadow-md shadow-indigo-500/10 inline-block">
                 ENCG • ENSA • ENSAM • Médecine • ISPITS • EST
               </span>
               <p className="text-sm sm:text-base text-slate-500 font-normal leading-relaxed">
@@ -72,17 +72,17 @@ export default function Hero() {
               <Button
                 onClick={() => scrollTo('#orientation')}
                 size="lg"
-                className="bg-gradient-to-r from-violet-600 via-indigo-650 to-indigo-700 hover:from-violet-750 hover:to-indigo-900 text-white shadow-[0_10px_25px_-5px_rgba(99,102,241,0.4)] hover:shadow-[0_12px_30px_-5px_rgba(99,102,241,0.55)] hover:scale-[1.02] transform active:scale-[0.98] transition-all duration-300 text-base px-8 py-6 rounded-2xl font-bold"
+                className="bg-gradient-to-r from-violet-600 via-indigo-600 to-indigo-800 hover:from-violet-750 hover:to-indigo-900 text-white shadow-[0_10px_25px_-5px_rgba(99,102,241,0.4)] hover:shadow-[0_12px_30px_-5px_rgba(99,102,241,0.55)] hover:scale-[1.02] transform active:scale-[0.98] transition-all duration-300 text-base px-8 py-6 rounded-2xl font-bold"
               >
                 <GraduationCap className="w-5 h-5 mr-2 animate-pulse" />
-                Je veux être orienté
+                Réserve ta place
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button
                 onClick={() => scrollTo('#contact')}
                 size="lg"
                 variant="outline"
-                className="bg-white/90 backdrop-blur-sm border-2 border-indigo-150 text-indigo-700 hover:bg-indigo-50/50 hover:border-indigo-300 hover:scale-[1.02] transform active:scale-[0.98] transition-all duration-300 text-base px-8 py-6 rounded-2xl font-bold"
+                className="bg-white/90 backdrop-blur-sm border-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50/50 hover:border-indigo-300 hover:scale-[1.02] transform active:scale-[0.98] transition-all duration-300 text-base px-8 py-6 rounded-2xl font-bold"
               >
                 Contacter un conseiller
               </Button>
