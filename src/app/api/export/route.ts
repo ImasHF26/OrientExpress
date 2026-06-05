@@ -21,11 +21,12 @@ export async function GET(request: Request) {
     }
 
     // CSV Format
-    const headers = ['ID', 'Nom', 'Téléphone', 'Niveau', 'Filière', 'Intérêt', 'Établissement', 'Date Inscription']
+    const headers = ['ID', 'Nom', 'Téléphone', 'Ville', 'Niveau', 'Filière', 'Intérêt', 'Établissement', 'Date Inscription']
     const rows = students.map((s) => [
       s.id,
       s.nom,
       s.telephone,
+      s.ville,
       s.niveau,
       s.filiere,
       s.interet,
