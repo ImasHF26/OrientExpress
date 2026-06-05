@@ -10,23 +10,28 @@ import {
   ExternalLink,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { SCHOOLS, SITE_CONFIG } from '@/lib/config'
+
+const schoolEmojis: Record<string, string> = {
+  encg: '🏛️',
+  ensa: '⚙️',
+  ensam: '🔧',
+  medecine: '🩺',
+  ispits: '💉',
+  est: '💻',
+}
 
 export default function CandidatureSection() {
   const handlePostuler = (schoolAcronym: string) => {
-    // Scroll vers le formulaire d'inscription avec pré-sélection de l'établissement
     const formSection = document.querySelector('#orientation')
     if (formSection) {
       formSection.scrollIntoView({ behavior: 'smooth' })
-      // Dispatch custom event pour pré-sélectionner l'établissement
       window.dispatchEvent(new CustomEvent('preselect-school', { detail: schoolAcronym }))
     }
   }
 
   return (
-    <section id="candidature" className="py-20 sm:py-28 bg-gradient-to-b from-gray-50 to-white">
+    <section id="candidature" className="py-24 sm:py-32 bg-[#0F0F0F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -36,15 +41,16 @@ export default function CandidatureSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-teal-100 text-teal-700 text-sm font-medium mb-4">
-            Établissements de la région
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#FFD600]/10 border border-[#FFD600]/20 text-[#FFD600] text-sm font-semibold mb-4">
+            Nos Établissements
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Les meilleurs établissements de <span className="text-teal-600">Rabat-Salé-Kénitra</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+            Les meilleures écoles publiques{' '}
+            <span className="text-[#FFD600]">au Maroc</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Découvre les établissements publics et privés de ta région. Compare
-            les spécialités, les conditions d&apos;admission et les débouchés professionnels.
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Découvre les établissements publics de ta région. Compare les spécialités,
+            les conditions d&apos;admission et les débouchés professionnels.
           </p>
         </motion.div>
 
@@ -58,85 +64,64 @@ export default function CandidatureSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <Card className="group h-full border-2 border-gray-100 hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                {/* Card Header with unique color */}
-                <div className={`bg-gradient-to-r ${school.gradient} p-5 text-white relative overflow-hidden`}>
-                  {/* Subtle pattern overlay */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full translate-y-1/2 -translate-x-1/2" />
-                  </div>
-
-                  <div className="relative">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <Badge className="bg-white/20 text-white border-white/30 text-xs mb-2">
-                          {school.type === 'public' ? 'Établissement Public' : 'Privé'}
-                        </Badge>
-                        <h3 className="text-lg font-bold">{school.acronym}</h3>
+              <div className="h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden group hover:border-[#FFD600]/30 hover:shadow-[0_0_40px_rgba(255,214,0,0.08)] transition-all duration-500">
+                {/* Header */}
+                <div className="p-6 pb-4 border-b border-white/5">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-12 h-12 rounded-xl bg-[#FFD600]/10 flex items-center justify-center text-2xl group-hover:bg-[#FFD600]/20 group-hover:scale-110 transition-all duration-300">
+                      {schoolEmojis[school.slug] || '🎓'}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-bold text-white">{school.acronym}</h3>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#FFD600]/10 text-[#FFD600] border border-[#FFD600]/20 font-medium">
+                          {school.type === 'public' ? 'Public' : 'Privé'}
+                        </span>
                       </div>
-                      <Badge className="bg-white/20 text-white border-white/30 text-xs">
-                        {school.rating} ★
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-white/90 mt-1 leading-snug">{school.name}</p>
-                    <div className="flex items-center gap-3 mt-2 text-white/80 text-xs">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {school.duree}
-                      </span>
                     </div>
                   </div>
+                  <p className="text-sm text-gray-400">{school.name}</p>
                 </div>
 
-                <CardContent className="p-5 space-y-4">
-                  {/* Description */}
+                {/* Body */}
+                <div className="p-6 space-y-4">
                   <p className="text-xs text-gray-500 leading-relaxed">{school.description}</p>
 
-                  {/* Specialities */}
+                  {/* Specialties */}
                   <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                       Spécialités
                     </p>
                     <div className="flex flex-wrap gap-1.5">
-                      {school.specialites.map((spec) => (
-                        <Badge
+                      {school.specialites.slice(0, 3).map((spec) => (
+                        <span
                           key={spec}
-                          variant="secondary"
-                          className={`text-xs ${school.badgeBg}`}
+                          className="bg-white/5 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-white/5"
                         >
                           {spec}
-                        </Badge>
+                        </span>
                       ))}
+                      {school.specialites.length > 3 && (
+                        <span className="text-xs text-gray-500 px-2 py-1">
+                          +{school.specialites.length - 3}
+                        </span>
+                      )}
                     </div>
                   </div>
 
                   {/* Info */}
                   <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <GraduationCap className="w-4 h-4 text-teal-500 shrink-0" />
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <GraduationCap className="w-4 h-4 text-[#FFD600] shrink-0" />
                       <span>{school.admission}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Building2 className="w-4 h-4 text-teal-500 shrink-0" />
-                      <span>{school.frais}</span>
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <Clock className="w-4 h-4 text-[#FFD600] shrink-0" />
+                      <span>{school.duree}</span>
                     </div>
-                  </div>
-
-                  {/* Debouches */}
-                  <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                      Débouchés
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {school.debouches.map((d) => (
-                        <span
-                          key={d}
-                          className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded"
-                        >
-                          {d}
-                        </span>
-                      ))}
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <Building2 className="w-4 h-4 text-[#FFD600] shrink-0" />
+                      <span>{school.frais}</span>
                     </div>
                   </div>
 
@@ -144,7 +129,7 @@ export default function CandidatureSection() {
                   <div className="flex gap-2 pt-2">
                     <Button
                       onClick={() => handlePostuler(school.acronym)}
-                      className={`flex-1 bg-gradient-to-r ${school.gradient} hover:opacity-90 text-white text-sm h-10`}
+                      className="flex-1 bg-[#FFD600] text-[#0F0F0F] hover:bg-[#E6C200] font-bold text-sm h-10 rounded-xl shadow-[0_0_15px_rgba(255,214,0,0.15)]"
                     >
                       <ExternalLink className="w-3.5 h-3.5 mr-1" />
                       Postuler
@@ -157,14 +142,14 @@ export default function CandidatureSection() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-teal-200 text-teal-700 hover:bg-teal-50 text-sm h-10"
+                        className="border-white/10 text-gray-400 hover:border-[#FFD600]/30 hover:text-[#FFD600] text-sm h-10 rounded-xl bg-transparent"
                       >
                         <Phone className="w-3.5 h-3.5" />
                       </Button>
                     </a>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -178,19 +163,20 @@ export default function CandidatureSection() {
         >
           <p className="text-gray-500 mb-4">
             Tu ne trouves pas ton établissement ? Nos conseillers connaissent toutes
-            les options de la région <strong>Rabat-Salé-Kénitra</strong>.
+            les options disponibles.
           </p>
           <a
-            href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Bonjour, je cherche un établissement dans la région Rabat-Salé-Kénitra. Pouvez-vous m\'aider ?')}`}
+            href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Bonjour, je cherche un établissement. Pouvez-vous m\'aider ?')}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <Button
               size="lg"
-              className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white shadow-lg"
+              className="bg-[#FFD600] text-[#0F0F0F] hover:bg-[#E6C200] font-bold shadow-[0_0_20px_rgba(255,214,0,0.2)] rounded-xl"
             >
               <Phone className="w-5 h-5 mr-2" />
               Parler à un conseiller
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </a>
         </motion.div>

@@ -41,33 +41,33 @@ export default function WhatsAppButton() {
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="absolute bottom-full right-0 mb-3 bg-white rounded-xl shadow-xl p-4 max-w-[240px] border border-gray-100"
+            className="absolute bottom-full right-0 mb-3 bg-[#112548] rounded-xl shadow-2xl p-4 max-w-[240px] border border-white/10"
           >
             <button
               onClick={() => setShowTooltip(false)}
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+              className="absolute top-2 right-2 text-white/40 hover:text-white transition-colors"
             >
               <X className="w-3.5 h-3.5" />
             </button>
-            <p className="text-sm font-semibold text-gray-900 mb-1">
+            <p className="text-sm font-semibold text-white mb-1">
               Besoin d&apos;aide ?
             </p>
-            <p className="text-xs text-gray-500">
-              Écris-nous sur WhatsApp pour parler à un conseiller de la région
-              Rabat-Salé-Kénitra.
+            <p className="text-xs text-white/45">
+              Écris-nous sur WhatsApp pour une consultation gratuite avec un
+              conseiller.
             </p>
           </motion.div>
         )}
       </AnimatePresence>
 
       <motion.a
-        href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Bonjour, je cherche de l\'aide pour mon orientation dans la région Rabat-Salé-Kénitra.')}`}
+        href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent("Bonjour, je souhaite une consultation gratuite pour mon orientation.")}`}
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', damping: 15, stiffness: 200 }}
-        className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-2xl hover:shadow-green-500/40 hover:scale-110 transition-all duration-300 group"
+        className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-2xl hover:shadow-green-500/40 hover:scale-110 transition-all duration-300"
         aria-label="Contacter sur WhatsApp"
       >
         <MessageCircle className="w-7 h-7 sm:w-8 sm:h-8 text-white" />

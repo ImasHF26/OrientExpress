@@ -19,9 +19,8 @@ const contactInfo = [
     value: formatWhatsAppNumber(SITE_CONFIG.whatsappNumber),
     action: 'Démarrer une discussion',
     href: `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Bonjour, je souhaite prendre rendez-vous pour mon orientation.')}`,
-    color: 'from-green-500 to-emerald-600',
-    textColor: 'text-green-600 group-hover:text-green-700',
-    hoverShadow: 'hover:shadow-green-500/10',
+    iconBg: 'bg-gradient-to-br from-green-500 to-emerald-600',
+    iconColor: 'text-white',
   },
   {
     icon: Phone,
@@ -29,9 +28,8 @@ const contactInfo = [
     value: SITE_CONFIG.phoneNumber,
     action: 'Nous appeler directement',
     href: `tel:${SITE_CONFIG.phoneNumber}`,
-    color: 'from-blue-600 to-indigo-700',
-    textColor: 'text-blue-600 group-hover:text-blue-700',
-    hoverShadow: 'hover:shadow-blue-500/10',
+    iconBg: 'bg-[#E8871A]',
+    iconColor: 'text-white',
   },
   {
     icon: Mail,
@@ -39,37 +37,37 @@ const contactInfo = [
     value: SITE_CONFIG.email,
     action: 'Nous envoyer un e-mail',
     href: `mailto:${SITE_CONFIG.email}`,
-    color: 'from-indigo-600 to-violet-700',
-    textColor: 'text-indigo-600 group-hover:text-indigo-700',
-    hoverShadow: 'hover:shadow-indigo-500/10',
+    iconBg: 'bg-white/10',
+    iconColor: 'text-white',
   },
 ]
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-20 sm:py-24 bg-gray-50/50 border-t border-gray-100">
+    <section id="contact" className="py-24 sm:py-32 bg-[#0B1F3A] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100/60 text-blue-800 text-sm font-semibold mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#E8871A]/10 border border-[#E8871A]/25 text-[#E8871A] text-xs font-bold tracking-[0.1em] uppercase mb-4">
             Contact
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
             Parle à un conseiller
           </h2>
-          <p className="text-lg text-gray-650 max-w-xl mx-auto">
-            Prends rendez-vous avec un conseiller et bénéficie d’un accompagnement personnalisé pour réussir ton orientation et ton admission.
+          <p className="text-base text-white/50 max-w-xl mx-auto">
+            Prends rendez-vous avec un conseiller et bénéficie d&apos;un
+            accompagnement personnalisé.
           </p>
         </motion.div>
 
-        {/* 3-Column Premium Contact Grid */}
+        {/* Cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {contactInfo.map((info, index) => (
+          {contactInfo.map((info, i) => (
             <motion.a
               key={info.label}
               href={info.href}
@@ -78,37 +76,36 @@ export default function ContactSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`flex flex-col items-center text-center p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl ${info.hoverShadow} hover:-translate-y-1 transition-all duration-300 group`}
+              transition={{ delay: i * 0.1 }}
+              className="flex flex-col items-center text-center p-8 bg-[#112548] border border-white/10 rounded-2xl hover:border-[#E8871A]/25 hover:shadow-[0_0_30px_rgba(232,135,26,0.06)] hover:-translate-y-1 transition-all duration-500 group"
             >
               <div
-                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${info.color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 mb-6`}
+                className={`w-14 h-14 rounded-2xl ${info.iconBg} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 mb-6`}
               >
-                <info.icon className="w-6 h-6 text-white" />
+                <info.icon className={`w-6 h-6 ${info.iconColor}`} />
               </div>
-              <h3 className="text-sm text-gray-400 font-semibold uppercase tracking-wider mb-2">
+              <h3 className="text-sm text-white/40 font-semibold uppercase tracking-wider mb-2">
                 {info.label}
               </h3>
-              <p className="text-lg font-bold text-gray-900 mb-4 break-all">
+              <p className="text-lg font-bold text-white mb-4 break-all">
                 {info.value}
               </p>
-              <span className={`text-sm font-bold transition-colors mt-auto flex items-center gap-1 ${info.textColor}`}>
-                {info.action} &rarr;
+              <span className="text-sm font-bold text-[#E8871A] mt-auto">
+                {info.action} →
               </span>
             </motion.a>
           ))}
         </div>
 
-        {/* Availability Banner */}
+        {/* Hours */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="flex items-center justify-center gap-2 mt-12 text-sm text-gray-500 bg-white border border-gray-100 rounded-full px-6 py-2.5 max-w-xs mx-auto shadow-sm"
+          className="flex items-center justify-center gap-2 mt-12 text-sm text-white/40 bg-[#112548] border border-white/10 rounded-full px-6 py-2.5 max-w-xs mx-auto"
         >
-          <Clock className="w-4 h-4 text-blue-600" />
-          <span className="font-semibold text-gray-600">{SITE_CONFIG.hours}</span>
+          <Clock className="w-4 h-4 text-[#E8871A]" />
+          <span className="font-semibold">{SITE_CONFIG.hours}</span>
         </motion.div>
       </div>
     </section>

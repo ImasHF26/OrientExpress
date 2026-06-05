@@ -1,441 +1,228 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import {
-  GraduationCap,
-  ClipboardList,
-  Phone,
-  ArrowRight,
-  CheckCircle2,
-  Loader2,
-  Database,
-} from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import {
-  SITE_CONFIG,
-  FORM_OPTIONS,
-  SCHOOLS,
-} from '@/lib/config'
+import { SITE_CONFIG } from '@/lib/config'
 
-interface FormData {
-  nom: string
-  telephone: string
-  niveau: string
-  filiere: string
-  interet: string
-  etablissement: string
-}
+const NIVEAUX = ['Bac', 'Bac+1', 'Bac+2', 'Bac+3', 'Bac+4', 'Bac+5']
 
 export default function OrientationSection() {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState<FormData>({
-    nom: '',
-    telephone: '',
-    niveau: '',
-    filiere: '',
-    interet: 'Général / Non spécifié',
-    etablissement: 'Non spécifié',
-  })
+  const [nom, setNom] = useState('')
+  const [tel, setTel] = useState('')
+  const [ville, setVille] = useState('')
+  const [niveau, setNiveau] = useState('')
+  const [filiere, setFiliere] = useState('')
   const [submitted, setSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState('')
+  const [error, setError] = useState('')
 
-  // Écouter l'événement de pré-sélection d'établissement
-  useEffect(() => {
-    const handler = (e: Event) => {
-      const customEvent = e as CustomEvent
-      const schoolAcronym = customEvent.detail as string
-      if (schoolAcronym) {
-        setFormData((prev) => ({ ...prev, etablissement: schoolAcronym }))
-      }
+  const inputClass =
+    'w-full bg-white/[0.06] border border-white/[0.12] rounded-[10px] px-4 py-[14px] text-[15px] text-white outline-none font-sans placeholder:text-white/30 transition-all duration-200 focus:border-[#E8871A] focus:shadow-[0_0_0_3px_rgba(232,135,26,0.15)]'
+
+  const labelClass =
+    'block text-xs font-bold tracking-[0.07em] uppercase text-white/65 mb-2'
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+
+    if (!nom.trim() || !tel.trim() || !ville.trim() || !niveau) {
+      setError('Merci de remplir tous les champs obligatoires.')
+      return
     }
-    window.addEventListener('preselect-school', handler)
-    return () => window.removeEventListener('preselect-school', handler)
-  }, [])
 
-  const updateField = (field: keyof FormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    const msg = [
+      'Bonjour CAP FUTURE MAROC 👋',
+      '',
+      'Je souhaite une étude de dossier.',
+      '',
+      `👤 Nom : ${nom}`,
+      `📍 Ville : ${ville}`,
+      `🎓 Niveau : ${niveau}`,
+      filiere ? `📚 Filière : ${filiere}` : '',
+      '',
+      'Merci !',
+    ]
+      .filter(Boolean)
+      .join('\n')
+
+    window.open(
+      `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`,
+      '_blank'
+    )
+
+    setSubmitted(true)
   }
-
-  const canProceed = () => {
-    switch (currentStep) {
-      case 0:
-        return formData.nom.trim() !== '' && formData.telephone.trim() !== ''
-      case 1:
-        if (formData.niveau === 'Bac') {
-          return formData.filiere !== ''
-        }
-        return formData.niveau !== ''
-      default:
-        return false
-    }
-  }
-
-  const handleSubmit = async () => {
-    setIsSubmitting(true)
-    setSubmitError('')
-
-    try {
-      const payload = {
-        ...formData,
-        filiere: formData.filiere || 'Non spécifiée',
-      }
-      const res = await fetch('/api/inscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-
-      const data = await res.json()
-
-      if (data.success) {
-        setSubmitted(true)
-      } else {
-        setSubmitError(data.error || 'Erreur lors de l\'inscription.')
-      }
-    } catch {
-      setSubmitError('Erreur de connexion. Vérifiez votre connexion internet.')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const steps = [
-    { title: 'Vos informations', icon: ClipboardList },
-    { title: 'Votre parcours', icon: GraduationCap },
-  ]
 
   if (submitted) {
     return (
-      <section id="orientation" className="py-20 sm:py-28 bg-white border-t border-gray-100">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', damping: 15 }}
-            className="w-20 h-20 mx-auto mb-6 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200"
+      <section id="consultation" className="bg-[#0B1F3A] py-20 px-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-[#112548] border border-white/10 rounded-[20px] p-12 max-w-[620px] mx-auto text-center relative overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#E8871A] to-[#F5A03C]" />
+          <div className="text-5xl mb-4">✅</div>
+          <h2 className="font-display text-2xl font-bold text-white mb-3">
+            Demande envoyée !
+          </h2>
+          <p className="text-white/55 mb-6">
+            On vous contacte sous 24h pour analyser votre profil, {nom}.
+          </p>
+          <button
+            onClick={() => {
+              setSubmitted(false)
+              setNom('')
+              setTel('')
+              setVille('')
+              setNiveau('')
+              setFiliere('')
+            }}
+            className="text-[#E8871A] font-semibold text-sm hover:underline"
           >
-            <CheckCircle2 className="w-10 h-10 text-blue-600" />
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-3xl font-bold text-gray-900 mb-4 tracking-tight"
-          >
-            Félicitations {formData.nom} !
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-gray-600 mb-4"
-          >
-            Ton inscription a été validée avec succès. Un conseiller te contactera sous peu pour finaliser ton rendez-vous d&apos;orientation.
-          </motion.p>
-
-          {/* Summary card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-gray-50 border border-gray-100 rounded-2xl p-6 mb-8 text-left max-w-md mx-auto shadow-sm"
-          >
-            <h4 className="font-semibold text-gray-900 mb-3 border-b border-gray-200/60 pb-2">Récapitulatif de candidature :</h4>
-            <div className="space-y-2.5 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-500">Nom :</span>
-                <span className="font-semibold text-gray-900">{formData.nom}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Téléphone :</span>
-                <span className="font-semibold text-gray-900">{formData.telephone}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Niveau :</span>
-                <span className="font-semibold text-gray-900">{formData.niveau}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Filière :</span>
-                <span className="font-semibold text-gray-900">{formData.filiere || 'Non spécifiée'}</span>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <a
-              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(`Bonjour, je suis ${formData.nom} (${formData.telephone}). Je viens de valider ma demande d'orientation sur CAP FUTURE MAROC (Niveau : ${formData.niveau}, Filière : ${formData.filiere || 'Non spécifiée'}).`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg font-bold rounded-xl"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Contacter via WhatsApp
-              </Button>
-            </a>
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-xl font-bold border-gray-300"
-              onClick={() => {
-                setSubmitted(false)
-                setCurrentStep(0)
-                setFormData({
-                  nom: '',
-                  telephone: '',
-                  niveau: '',
-                  filiere: '',
-                  interet: 'Général / Non spécifié',
-                  etablissement: 'Non spécifié',
-                })
-              }}
-            >
-              Nouvelle inscription
-            </Button>
-          </motion.div>
-        </div>
+            ← Nouvelle demande
+          </button>
+        </motion.div>
       </section>
     )
   }
 
   return (
-    <section id="orientation" className="py-20 sm:py-28 bg-white border-t border-gray-100">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100/60 text-blue-800 text-sm font-semibold mb-4">
-            Orientation 2026
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-            Commence ton orientation dès aujourd’hui
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Complète le formulaire en quelques minutes et bénéficie d’un accompagnement personnalisé pour préparer ton avenir sereinement.
-          </p>
-        </motion.div>
+    <section id="consultation" className="bg-[#0B1F3A] py-20 px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-[#112548] border border-white/10 rounded-[20px] p-8 sm:p-[52px_48px] max-w-[620px] mx-auto relative overflow-hidden"
+      >
+        {/* Gold top bar */}
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#E8871A] to-[#F5A03C]" />
 
-        {/* Step Indicator */}
-        <div className="flex items-center justify-center gap-1 sm:gap-2 mb-10">
-          {steps.map((step, i) => (
-            <div key={i} className="flex items-center gap-1 sm:gap-2">
-              <motion.div
-                animate={{
-                  backgroundColor:
-                    i <= currentStep ? '#2563eb' : '#e5e7eb',
-                  scale: i === currentStep ? 1.1 : 1,
-                }}
-                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-sm"
-              >
-                <step.icon
-                  className={`w-4 h-4 sm:w-5 sm:h-5 ${
-                    i <= currentStep ? 'text-white' : 'text-gray-400'
-                  }`}
-                />
-              </motion.div>
-              {i < steps.length - 1 && (
-                <div
-                  className={`h-0.5 w-6 sm:w-14 transition-colors ${
-                    i < currentStep ? 'bg-blue-600' : 'bg-gray-200'
-                  }`}
-                />
-              )}
-            </div>
-          ))}
+        {/* Header */}
+        <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-[14px]">
+          ✦ Consultation gratuite
         </div>
 
-        {/* Form Card */}
-        <motion.div
-          key={currentStep}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <Card className="border-2 border-gray-100 shadow-xl rounded-2xl overflow-hidden">
-            <CardContent className="p-6 sm:p-8">
-              {/* Step 0: Personal Info */}
-              {currentStep === 0 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
-                      Informations personnelles
-                    </h3>
-                    <p className="text-gray-550 text-sm">
-                      Ces informations nous permettront de t&apos;appeler et de valider ton profil.
-                    </p>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="nom" className="font-semibold text-gray-700">Nom complet *</Label>
-                      <Input
-                        id="nom"
-                        placeholder="Ex: Mohamed Amrani"
-                        value={formData.nom}
-                        onChange={(e) => updateField('nom', e.target.value)}
-                        className="h-12 text-base rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="telephone" className="font-semibold text-gray-700">
-                        Numéro de téléphone *
-                      </Label>
-                      <Input
-                        id="telephone"
-                        type="tel"
-                        placeholder="Ex: 06 12 34 56 78"
-                        value={formData.telephone}
-                        onChange={(e) =>
-                          updateField('telephone', e.target.value)
-                        }
-                        className="h-12 text-base rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
+        <h2 className="font-display text-[clamp(22px,3.5vw,32px)] font-bold text-white mb-2">
+          Dossier au millimètre — commencez ici.
+        </h2>
 
-              {/* Step 1: Academic Info */}
-              {currentStep === 1 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
-                      Ton parcours académique
-                    </h3>
-                    <p className="text-gray-550 text-sm">
-                      Ces critères nous aident à filtrer les conditions d&apos;admission des écoles.
-                    </p>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label className="font-semibold text-gray-700">Niveau d&apos;étude actuel *</Label>
-                      <Select
-                        value={formData.niveau}
-                        onValueChange={(v) => {
-                          setFormData((prev) => ({
-                            ...prev,
-                            niveau: v,
-                            filiere: '',
-                          }))
-                        }}
-                      >
-                        <SelectTrigger className="h-12 text-base rounded-xl border-gray-200">
-                          <SelectValue placeholder="Sélectionne ton niveau" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {FORM_OPTIONS.niveaux.map((n) => (
-                            <SelectItem key={n} value={n}>
-                              {n}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="filiere" className="font-semibold text-gray-700">
-                        Filière d&apos;origine {formData.niveau === 'Bac' ? '*' : '(Optionnelle)'}
-                      </Label>
-                      {formData.niveau === 'Bac' ? (
-                        <Select
-                          value={formData.filiere}
-                          onValueChange={(v) => updateField('filiere', v)}
-                        >
-                          <SelectTrigger className="h-12 text-base rounded-xl border-gray-200">
-                            <SelectValue placeholder="Sélectionne ta filière" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {FORM_OPTIONS.filieres.map((f) => (
-                              <SelectItem key={f} value={f}>
-                                {f}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      ) : (
-                        <Input
-                          id="filiere"
-                          placeholder="Ex: Économie, Techniques de Management, etc. (Optionnelle)"
-                          value={formData.filiere}
-                          onChange={(e) => updateField('filiere', e.target.value)}
-                          className="h-12 text-base rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                        />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
+        <p className="text-sm text-white/55 italic border-r-2 border-[#E8871A]/30 pr-3 leading-[1.75] mb-2.5">
+          « Mlî ki3tina l-ma3loumat dial profil dialk b-diqqa, nqedrou ndiro lik
+          étude complète. »
+        </p>
 
+        <p className="text-[15px] text-white/50 mb-8 leading-[1.7]">
+          Remplissez ce formulaire — notre équipe vous contacte sous 24h pour
+          analyser votre profil.
+        </p>
 
+        <form onSubmit={handleSubmit} className="space-y-[18px]">
+          {/* Nom */}
+          <div>
+            <label className={labelClass}>👤 Nom complet</label>
+            <input
+              type="text"
+              value={nom}
+              onChange={(e) => setNom(e.target.value)}
+              placeholder="Ex : Mohammed El Amrani"
+              required
+              className={inputClass}
+            />
+          </div>
 
-              {/* Error message */}
-              {submitError && (
-                <div className="mt-4 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-750 text-sm">
-                  {submitError}
-                </div>
-              )}
+          {/* Téléphone */}
+          <div>
+            <label className={labelClass}>📱 Téléphone WhatsApp</label>
+            <input
+              type="tel"
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
+              placeholder="+212 6XX XXX XXX"
+              required
+              className={inputClass}
+            />
+          </div>
 
-              {/* Navigation Buttons */}
-              <div className="flex justify-between mt-8 pt-6 border-t border-gray-100">
-                <Button
-                  variant="ghost"
-                  onClick={() =>
-                    setCurrentStep(Math.max(0, currentStep - 1))
-                  }
-                  disabled={currentStep === 0 || isSubmitting}
-                  className="text-gray-500 font-semibold rounded-xl"
+          {/* Ville */}
+          <div>
+            <label className={labelClass}>📍 Ville</label>
+            <input
+              type="text"
+              value={ville}
+              onChange={(e) => setVille(e.target.value)}
+              placeholder="Casablanca, Rabat, Fès…"
+              required
+              className={inputClass}
+            />
+          </div>
+
+          {/* Niveau — Pills */}
+          <div>
+            <label className={labelClass}>🎓 Niveau d&apos;études actuel</label>
+            <div className="grid grid-cols-3 gap-2">
+              {NIVEAUX.map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setNiveau(n)}
+                  className={`py-[11px] px-1.5 text-[13px] font-semibold rounded-lg border cursor-pointer transition-all duration-200 font-sans ${
+                    niveau === n
+                      ? 'bg-[#E8871A] border-[#E8871A] text-white shadow-[0_4px_16px_rgba(232,135,26,0.35)]'
+                      : 'bg-white/[0.06] border-white/[0.12] text-white/50 hover:border-white/25 hover:text-white/70'
+                  }`}
                 >
-                  Retour
-                </Button>
-                {currentStep < steps.length - 1 ? (
-                  <Button
-                    onClick={() => setCurrentStep(currentStep + 1)}
-                    disabled={!canProceed()}
-                    className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-900 text-white shadow-lg disabled:opacity-50 font-bold rounded-xl px-6"
-                  >
-                    Continuer
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!canProceed() || isSubmitting}
-                    className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-900 text-white shadow-lg disabled:opacity-50 font-bold rounded-xl px-6"
-                  >
-                    {isSubmitting ? (
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    ) : (
-                      <Database className="w-4 h-4 mr-2" />
-                    )}
-                    {isSubmitting ? 'Enregistrement...' : 'Valider & sauvegarder'}
-                  </Button>
-                )}
+                  {n}
+                </button>
+              ))}
+            </div>
+
+            {/* Filière dynamique */}
+            <div
+              className={`overflow-hidden transition-all duration-400 ease-in-out ${
+                niveau ? 'max-h-[180px] opacity-100 mt-3.5' : 'max-h-0 opacity-0 mt-0'
+              }`}
+            >
+              <div className="bg-[#E8871A]/[0.07] border border-[#E8871A]/[0.22] rounded-[10px] p-4">
+                <label className="block text-[11px] font-bold tracking-[0.08em] uppercase text-[#E8871A] mb-2">
+                  ✏️ Précisez votre filière actuelle
+                </label>
+                <input
+                  type="text"
+                  value={filiere}
+                  onChange={(e) => setFiliere(e.target.value)}
+                  placeholder="Ex : Droit privé, Économie, Informatique, Génie civil…"
+                  className="w-full bg-white/[0.06] border border-[#E8871A]/[0.22] rounded-lg px-4 py-[13px] text-sm text-white outline-none font-sans placeholder:text-white/30 focus:border-[#E8871A]"
+                />
+                <p className="text-xs text-[#E8871A]/60 mt-[7px] italic leading-[1.5]">
+                  « Hadi important bzzaf — précisez le plus possible pour une
+                  analyse complète. »
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
+            </div>
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="w-full py-[18px] bg-[#E8871A] text-white font-sans text-base font-bold border-none rounded-[10px] cursor-pointer mt-2 shadow-[0_8px_32px_rgba(232,135,26,0.4)] tracking-[0.02em] hover:bg-[#F5A03C] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+          >
+            🎯 Valider mon profil et demander mon étude de dossier
+          </button>
+        </form>
+
+        <p className="text-center text-xs text-white/30 mt-[14px]">
+          🔒 Données confidentielles · ✔ Gratuit · ✔ Réponse sous 24h
+        </p>
+      </motion.div>
     </section>
   )
 }

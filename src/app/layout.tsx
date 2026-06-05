@@ -1,40 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["700", "900"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-body",
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "CAP FUTURE MAROC — Orientation Étudiante au Maroc",
+  title: "CAP FUTURE MAROC — Orientation & Admission Master au Maroc",
   description:
-    "CAP FUTURE MAROC — Plateforme N°1 d'orientation étudiante au Maroc. Découvrez les écoles adaptées à votre profil et soyez accompagné par nos conseillers experts.",
+    "CAP FUTURE MAROC — Accompagnement académique premium. Nous analysons votre dossier, sélectionnons les Masters et Écoles d'ingénieurs reconnus, et vous accompagnons jusqu'à l'admission.",
   keywords: [
     "orientation",
-    "étudiant",
+    "master",
     "Maroc",
-    "école",
-    "université",
-    "candidature",
-    "conseil",
+    "école d'ingénieurs",
+    "admission",
+    "accompagnement",
     "bac",
-    "formation",
+    "CAP FUTURE",
+    "consultation gratuite",
+    "dossier académique",
   ],
   icons: {
     icon: "/logo-orientation.svg",
   },
   openGraph: {
-    title: "CAP FUTURE MAROC — Ton avenir mérite une vraie orientation",
+    title: "CAP FUTURE MAROC — Votre Master au Maroc, garanti ou remboursé.",
     description:
-      "Découvre les études adaptées à ton profil et sois accompagné dans ta décision académique.",
+      "Nous analysons votre dossier au millimètre, sélectionnons uniquement les Masters et Écoles d'ingénieurs reconnus, et vous accompagnons jusqu'à l'admission.",
     type: "website",
   },
 };
@@ -47,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${playfair.variable} ${jakarta.variable} antialiased bg-[#0B1F3A] text-white font-sans`}
       >
         {children}
         <Toaster />

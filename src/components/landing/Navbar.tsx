@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/config'
 
 const navLinks = [
   { label: 'Accueil', href: '#hero' },
-  { label: 'Inscription', href: '#orientation' },
+  { label: 'Orientation', href: '#consultation' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -17,19 +16,14 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (href: string) => {
+  const scrollTo = (href: string) => {
     setIsMobileMenuOpen(false)
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -40,23 +34,24 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/90 backdrop-blur-md shadow-md border-b border-gray-100'
-            : 'bg-transparent'
+            ? 'bg-[#0B1F3A]/97 backdrop-blur-xl shadow-lg border-b border-white/10'
+            : 'bg-[#0B1F3A]/97 backdrop-blur-xl'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Logo */}
             <button
-              onClick={() => scrollToSection('#hero')}
+              onClick={() => scrollTo('#hero')}
               className="flex items-center gap-3 group"
             >
               <img
                 src="/logo-capfuture.png"
                 alt={SITE_CONFIG.name}
-                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-10 sm:h-12 w-auto object-contain"
               />
-              <span className="font-extrabold text-gray-900 text-lg sm:text-xl tracking-tight">
-                CAP FUTURE MAROC
+              <span className="font-bold text-white text-lg sm:text-xl tracking-tight font-sans">
+                CAP FUTURE <span className="text-[#E8871A]">MAROC</span>
               </span>
             </button>
 
@@ -65,29 +60,29 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <button
                   key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-200"
+                  onClick={() => scrollTo(link.href)}
+                  className="px-3 py-2 text-sm font-medium text-white/60 hover:text-white rounded-lg transition-all duration-200"
                 >
                   {link.label}
                 </button>
               ))}
-              <Button
-                onClick={() => scrollToSection('#orientation')}
-                className="ml-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-850 text-white shadow-lg hover:shadow-blue-500/25 transition-all duration-200"
+              <button
+                onClick={() => scrollTo('#consultation')}
+                className="ml-3 bg-[#E8871A] text-white font-semibold text-[13px] px-[22px] py-[10px] rounded-full hover:bg-[#F5A03C] shadow-[0_4px_20px_rgba(232,135,26,0.3)] transition-all duration-200"
               >
-                S'inscrire
-              </Button>
+                Consultation gratuite →
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-gray-700" />
+                <X className="w-6 h-6 text-white" />
               ) : (
-                <Menu className="w-6 h-6 text-gray-700" />
+                <Menu className="w-6 h-6 text-white" />
               )}
             </button>
           </div>
@@ -102,7 +97,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white pt-20 lg:hidden"
+            className="fixed inset-0 z-40 bg-[#0B1F3A] pt-20 lg:hidden"
           >
             <div className="flex flex-col items-center gap-2 p-6">
               {navLinks.map((link, i) => (
@@ -111,19 +106,18 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  onClick={() => scrollToSection(link.href)}
-                  className="w-full py-4 text-lg font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 text-center transition-colors"
+                  onClick={() => scrollTo(link.href)}
+                  className="w-full py-4 text-lg font-medium text-white/70 hover:text-white border-b border-white/5 text-center transition-colors"
                 >
                   {link.label}
                 </motion.button>
               ))}
-              <Button
-                onClick={() => scrollToSection('#orientation')}
-                className="mt-6 w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-850 text-white shadow-lg"
-                size="lg"
+              <button
+                onClick={() => scrollTo('#consultation')}
+                className="mt-6 w-full bg-[#E8871A] text-white font-semibold text-base py-4 rounded-full hover:bg-[#F5A03C] shadow-[0_4px_20px_rgba(232,135,26,0.3)]"
               >
-                S'inscrire maintenant
-              </Button>
+                Consultation gratuite →
+              </button>
             </div>
           </motion.div>
         )}
