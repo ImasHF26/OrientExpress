@@ -13,10 +13,11 @@ model Student {
   id            String   @id @default(cuid())
   nom           String
   telephone     String
+  ville         String   @default("")
   niveau        String
   filiere       String
-  interet       String
-  etablissement String
+  interet       String   @default("")
+  etablissement String   @default("")
   contacted     Boolean  @default(false)
   notes         String?
   createdAt     DateTime @default(now())

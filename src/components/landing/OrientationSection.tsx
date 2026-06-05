@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { SITE_CONFIG } from '@/lib/config'
+import { Loader2 } from 'lucide-react'
 
 const NIVEAUX = ['Bac', 'Bac+1', 'Bac+2', 'Bac+3', 'Bac+4', 'Bac+5']
 
@@ -13,6 +14,7 @@ export default function OrientationSection() {
   const [niveau, setNiveau] = useState('')
   const [filiere, setFiliere] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const inputClass =
@@ -21,15 +23,7 @@ export default function OrientationSection() {
   const labelClass =
     'block text-xs font-bold tracking-[0.07em] uppercase text-white/65 mb-2'
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-
-    if (!nom.trim() || !tel.trim() || !ville.trim() || !niveau) {
-      setError('Merci de remplir tous les champs obligatoires.')
-      return
-    }
-
+  const openWhatsApp = () => {
     const msg = [
       'Bonjour CAP FUTURE MAROC 👋',
       '',
@@ -49,8 +43,52 @@ export default function OrientationSection() {
       `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`,
       '_blank'
     )
+  }
 
-    setSubmitted(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+
+    if (!nom.trim() || !tel.trim() || !ville.trim() || !niveau) {
+      setError('Merci de remplir tous les champs obligatoires.')
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      // 1. Sauvegarder en base de données
+      const res = await fetch('/api/inscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nom: nom.trim(),
+          telephone: tel.trim(),
+          ville: ville.trim(),
+          niveau,
+          filiere: filiere.trim(),
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Erreur lors de l\'enregistrement.')
+      }
+
+      // 2. Ouvrir WhatsApp
+      openWhatsApp()
+
+      // 3. Afficher succès
+      setSubmitted(true)
+    } catch (err) {
+      console.error('Erreur:', err)
+      // Même si la BDD échoue, on ouvre WhatsApp quand même
+      openWhatsApp()
+      setSubmitted(true)
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -66,8 +104,12 @@ export default function OrientationSection() {
           <h2 className="font-display text-2xl font-bold text-white mb-3">
             Demande envoyée !
           </h2>
-          <p className="text-white/55 mb-6">
-            On vous contacte sous 24h pour analyser votre profil, {nom}.
+          <p className="text-white/55 mb-3">
+            Votre profil a été enregistré avec succès, <strong className="text-white">{nom}</strong>.
+          </p>
+          <p className="text-white/40 text-sm mb-6">
+            Notre équipe vous contacte sous 24h. Si la conversation WhatsApp
+            s&apos;est ouverte, envoyez le message pour accélérer le processus.
           </p>
           <button
             onClick={() => {
@@ -213,9 +255,17 @@ export default function OrientationSection() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-[18px] bg-[#E8871A] text-white font-sans text-base font-bold border-none rounded-[10px] cursor-pointer mt-2 shadow-[0_8px_32px_rgba(232,135,26,0.4)] tracking-[0.02em] hover:bg-[#F5A03C] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+            disabled={loading}
+            className="w-full py-[18px] bg-[#E8871A] text-white font-sans text-base font-bold border-none rounded-[10px] cursor-pointer mt-2 shadow-[0_8px_32px_rgba(232,135,26,0.4)] tracking-[0.02em] hover:bg-[#F5A03C] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
           >
-            🎯 Valider mon profil et demander mon étude de dossier
+            {loading ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Enregistrement en cours…
+              </>
+            ) : (
+              '🎯 Valider mon profil et demander mon étude de dossier'
+            )}
           </button>
         </form>
 

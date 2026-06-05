@@ -5,12 +5,12 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
-    const { nom, telephone, niveau, filiere, interet, etablissement } = body
+    const { nom, telephone, ville, niveau, filiere, interet, etablissement } = body
 
-    // Validation des champs requis
-    if (!nom || !telephone || !niveau || !filiere || !interet || !etablissement) {
+    // Validation des champs requis (nom + telephone + niveau minimum)
+    if (!nom || !telephone || !niveau) {
       return NextResponse.json(
-        { success: false, error: 'Tous les champs sont requis.' },
+        { success: false, error: 'Nom, téléphone et niveau sont requis.' },
         { status: 400 }
       )
     }
@@ -26,10 +26,11 @@ export async function POST(request: Request) {
         where: { id: existing.id },
         data: {
           nom,
+          ville: ville || '',
           niveau,
-          filiere,
-          interet,
-          etablissement,
+          filiere: filiere || '',
+          interet: interet || '',
+          etablissement: etablissement || '',
         },
       })
 
@@ -46,10 +47,11 @@ export async function POST(request: Request) {
       data: {
         nom,
         telephone,
+        ville: ville || '',
         niveau,
-        filiere,
-        interet,
-        etablissement,
+        filiere: filiere || '',
+        interet: interet || '',
+        etablissement: etablissement || '',
       },
     })
 
