@@ -143,11 +143,11 @@ export default function OrientationSection() {
 
         {/* Header */}
         <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-[14px]">
-          ✦ Audit d&apos;orientation
+          ✦ Audit &amp; Stratégie d&apos;Orientation
         </div>
 
-        <h2 className="font-display text-[clamp(22px,3.5vw,32px)] font-bold text-white mb-2">
-          Dossier au millimètre — commencez ici.
+        <h2 className="font-display text-[clamp(22px,3.5vw,32px)] font-bold text-white mb-3">
+          Un service d&apos;expertise dédié pour sécuriser votre parcours académique.
         </h2>
 
         <p className="text-[15px] text-white/50 mb-8 leading-[1.7]">
