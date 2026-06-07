@@ -26,7 +26,7 @@ export default function Hero() {
           transition={{ delay: 0.2 }}
           className="inline-flex items-center gap-2 px-[18px] py-[7px] rounded-full bg-[#E8871A]/15 border border-[#E8871A]/35 text-[#F5A03C] text-xs font-semibold tracking-[0.08em] uppercase mb-8"
         >
-          🇲🇦 &nbsp; Accompagnement académique premium · Maroc
+          Accompagnement académique premium · Maroc
         </motion.div>
 
         {/* Main Heading */}
