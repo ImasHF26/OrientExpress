@@ -6,8 +6,8 @@ export const SITE_CONFIG = {
   name: 'CAP FUTURE MAROC',
   description: 'CAP FUTURE MAROC — Plateforme d\'orientation étudiante — Région Rabat-Salé-Kénitra',
   region: 'Rabat-Salé-Kénitra',
-  whatsappNumber: '212666763438', // Numéro WhatsApp (sans +)
-  phoneNumber: '+212 6 66 76 34 38', // Numéro de téléphone affiché
+  whatsappNumber: '212764252467', // Numéro WhatsApp (sans +)
+  phoneNumber: '+212 7 64 25 24 67', // Numéro de téléphone affiché
   email: 'abdelouahab069@gmail.com',
   address: 'Rabat-Salé-Kénitra, Maroc',
   hours: 'Lun - Sam : 9h00 - 18h00',

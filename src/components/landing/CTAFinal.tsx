@@ -35,7 +35,7 @@ export default function CTAFinal() {
             onClick={() => scrollTo('#consultation')}
             className="inline-block bg-[#E8871A] text-white text-lg font-bold px-12 py-5 rounded-lg shadow-[0_8px_40px_rgba(232,135,26,0.35)] hover:bg-[#F5A03C] hover:shadow-[0_12px_50px_rgba(232,135,26,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
           >
-            Réserver ma consultation gratuite →
+            Réserver mon orientation →
           </button>
         </motion.div>
       </div>

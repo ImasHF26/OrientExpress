@@ -143,17 +143,12 @@ export default function OrientationSection() {
 
         {/* Header */}
         <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-[14px]">
-          ✦ Consultation gratuite
+          ✦ Audit d&apos;orientation
         </div>
 
         <h2 className="font-display text-[clamp(22px,3.5vw,32px)] font-bold text-white mb-2">
           Dossier au millimètre — commencez ici.
         </h2>
-
-        <p className="text-sm text-white/55 italic border-r-2 border-[#E8871A]/30 pr-3 leading-[1.75] mb-2.5">
-          « Mlî ki3tina l-ma3loumat dial profil dialk b-diqqa, nqedrou ndiro lik
-          étude complète. »
-        </p>
 
         <p className="text-[15px] text-white/50 mb-8 leading-[1.7]">
           Remplissez ce formulaire — notre équipe vous contacte sous 24h pour
@@ -264,7 +259,7 @@ export default function OrientationSection() {
                 Enregistrement en cours…
               </>
             ) : (
-              '🎯 Valider mon profil et demander mon étude de dossier'
+              'Valider mon profil et lancer mon orientation →'
             )}
           </button>
         </form>

@@ -53,7 +53,7 @@ export default function WhatsAppButton() {
               Besoin d&apos;aide ?
             </p>
             <p className="text-xs text-white/45">
-              Écris-nous sur WhatsApp pour une consultation gratuite avec un
+              Écris-nous sur WhatsApp pour réserver ton orientation avec un
               conseiller.
             </p>
           </motion.div>
@@ -61,7 +61,7 @@ export default function WhatsAppButton() {
       </AnimatePresence>
 
       <motion.a
-        href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent("Bonjour, je souhaite une consultation gratuite pour mon orientation.")}`}
+        href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent("Bonjour, je souhaite réserver mon orientation.")}`}
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}
