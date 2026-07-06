@@ -36,9 +36,9 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="font-display font-black text-[clamp(34px,7vw,66px)] leading-[1.08] text-white max-w-[780px] mx-auto mb-5"
         >
-          Audit &amp; Stratégie
+          Votre Master au Maroc,
           <br />
-          <span className="text-[#E8871A]">d&apos;Orientation.</span>
+          <span className="text-[#E8871A]">garanti ou remboursé.</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -46,9 +46,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-[clamp(16px,2.5vw,20px)] font-medium text-white/70 mb-7 max-w-[600px] mx-auto"
+          className="text-[clamp(15px,2.5vw,19px)] font-light text-white/55 italic mb-7 max-w-[560px] mx-auto"
         >
-          Un service d&apos;expertise dédié pour sécuriser votre parcours académique.
+          « Nwajdolik l-master lli kaystahl — bla dya3 waqt, bla mfajaat »
         </motion.p>
 
         {/* Description */}
@@ -56,11 +56,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="text-[clamp(15px,2.2vw,18px)] text-white/50 max-w-[620px] mx-auto mb-[52px] leading-[1.85]"
+          className="text-[clamp(15px,2.2vw,18px)] text-white/65 max-w-[560px] mx-auto mb-[52px] leading-[1.85]"
         >
-          Nous analysons votre dossier au millimètre, sélectionnons les Masters
-          et Écoles d&apos;ingénieurs reconnus, et vous fournissons une stratégie
-          d&apos;orientation sur-mesure pour maximiser vos chances d&apos;admission.
+          Nous analysons votre dossier au millimètre, sélectionnons uniquement
+          les Masters et Écoles d&apos;ingénieurs reconnus, et vous accompagnons
+          jusqu&apos;à l&apos;admission.
         </motion.p>
 
         {/* CTA */}
@@ -73,7 +73,7 @@ export default function Hero() {
             onClick={() => scrollTo('#consultation')}
             className="inline-block bg-[#E8871A] text-white text-base font-bold px-12 py-[18px] rounded-lg shadow-[0_8px_32px_rgba(232,135,26,0.35)] hover:bg-[#F5A03C] hover:shadow-[0_12px_40px_rgba(232,135,26,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
           >
-            Réserver mon orientation →
+            Réserver ma consultation gratuite →
           </button>
         </motion.div>
 

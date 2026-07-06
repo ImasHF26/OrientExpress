@@ -8,7 +8,7 @@ export default function CTAFinal() {
   }
 
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-b from-[#0d2340] via-[#0B1F3A] to-[#0B1F3A]">
+    <section className="relative py-24 sm:py-32 overflow-hidden bg-[#0B1F3A]">
       {/* Decorative orbs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-[#E8871A]/5 rounded-full blur-3xl animate-glow-pulse" />
@@ -37,11 +37,9 @@ export default function CTAFinal() {
 
           {/* Description */}
           <p className="text-base sm:text-lg text-white/50 mb-10 max-w-xl mx-auto leading-relaxed">
-            Ne laissez pas votre orientation au hasard. Réservez votre séance
-            d&apos;audit et stratégie d&apos;orientation avec un expert CAP
-            FUTURE MAROC. Nous analysons votre dossier en profondeur et
-            définissons ensemble votre feuille de route pour intégrer les
-            meilleurs établissements.
+            Prenez 30 minutes maintenant. Réservez votre consultation gratuite
+            avec un expert CAP FUTURE MAROC. Nous analysons votre dossier et
+            posons ensemble la feuille de route — sans engagement.
           </p>
 
           {/* CTA Button */}
@@ -54,7 +52,7 @@ export default function CTAFinal() {
 
           {/* Scarcity note */}
           <p className="text-sm text-white/35 mt-5">
-            ⏳ Places limitées pour garantir la qualité de chaque analyse.
+            ⏳ Places limitées · Candidatures ouvertes dès maintenant
           </p>
         </motion.div>
       </div>

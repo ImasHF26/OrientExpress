@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   region: 'Rabat-Salé-Kénitra',
   whatsappNumber: '212764252467', // Numéro WhatsApp (sans +)
   phoneNumber: '+212 7 64 25 24 67', // Numéro de téléphone affiché
-  email: 'abdelouahab069@gmail.com',
+  email: 'capfuturemaroc@gmail.com',
   address: 'Rabat-Salé-Kénitra, Maroc',
   hours: 'Lun - Sam : 9h00 - 18h00',
 } as const

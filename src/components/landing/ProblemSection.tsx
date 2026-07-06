@@ -1,71 +1,83 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { AlertTriangle, Clock, HelpCircle, Ban } from 'lucide-react'
+import { AlertTriangle, Puzzle, Clock } from 'lucide-react'
 
 const problems = [
   {
-    icon: HelpCircle,
-    title: 'Orientation confuse',
-    desc: "Des dizaines de filières, des centaines d'écoles — mais aucune source fiable pour savoir laquelle te correspond vraiment.",
+    icon: AlertTriangle,
+    num: '01',
+    title: 'Un marché très compétitif et saturé',
+    desc: "Chaque année, des milliers de candidats visent les mêmes Masters. Sans une stratégie précise, votre dossier risque de se perdre dans la masse et de passer inaperçu face aux commissions d'admission.",
+    color: 'text-red-500',
+    bg: 'bg-red-500/10',
+  },
+  {
+    icon: Puzzle,
+    num: '02',
+    title: 'La complexité des écoles et des procédures',
+    desc: "Entre les conditions d'admission, les dates limites, les concours, les dossiers de candidature et les entretiens, il est facile de rater une étape ou de mal préparer son dossier.",
+    color: 'text-orange-500',
+    bg: 'bg-orange-500/10',
   },
   {
     icon: Clock,
-    title: 'Perte de temps massive',
-    desc: "Des semaines à chercher seul, à remplir des dossiers au hasard, pour finalement rater les deadlines ou postuler aux mauvais endroits.",
-  },
-  {
-    icon: Ban,
-    title: "Admissions ratées",
-    desc: "Sans préparation ciblée ni connaissance des critères réels, beaucoup d'étudiants passent à côté de leur école idéale.",
-  },
-  {
-    icon: AlertTriangle,
-    title: 'Mauvais conseils',
-    desc: "Les informations qu'on trouve en ligne sont souvent obsolètes, contradictoires ou tout simplement fausses.",
+    num: '03',
+    title: 'Le temps perdu et les mauvais choix',
+    desc: "Beaucoup d'étudiants perdent des mois à s'orienter seuls, postulent aux mauvais programmes, et finissent par rater les deadlines critiques — une année entière perdue.",
+    color: 'text-amber-600',
+    bg: 'bg-amber-500/10',
   },
 ]
 
 export default function ProblemSection() {
   return (
-    <section className="bg-[#0B1F3A] py-24 sm:py-32 border-t border-white/5">
+    <section className="bg-[#E8EEF6] py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold tracking-[0.1em] uppercase mb-4">
-            Le problème
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-            L&apos;orientation au Maroc est{' '}
-            <span className="text-red-400">un parcours du combattant.</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A] leading-tight">
+            Votre licence en main —
+            <br />
+            <span className="text-[#E8871A]">
+              mais les pièges sont nombreux.
+            </span>
           </h2>
-          <p className="text-base text-white/50 max-w-xl mx-auto leading-relaxed">
-            Chaque année, des milliers d&apos;étudiants perdent leur chance parce
-            qu&apos;ils n&apos;ont pas les bonnes informations au bon moment.
-          </p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6">
           {problems.map((p, i) => (
             <motion.div
-              key={p.title}
+              key={p.num}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-[#112548] border border-white/10 rounded-2xl p-7 group hover:border-red-500/20 transition-all duration-500"
+              className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 group"
             >
-              <div className="w-11 h-11 rounded-xl bg-red-500/10 flex items-center justify-center mb-5 group-hover:bg-red-500/15 transition-colors">
-                <p.icon className="w-5 h-5 text-red-400" />
+              {/* Badge */}
+              <div className="flex items-center gap-2 mb-5">
+                <span
+                  className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.1em] uppercase ${p.color}`}
+                >
+                  <span className={`w-2 h-2 rounded-full ${p.bg} ${p.color}`}>
+                    <span className={`block w-2 h-2 rounded-full ${p.color.replace('text-', 'bg-')}`} />
+                  </span>
+                  Problème n°{p.num}
+                </span>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">{p.title}</h3>
-              <p className="text-sm text-white/45 leading-relaxed">{p.desc}</p>
+              <h3 className="text-lg font-bold text-[#0B1F3A] mb-3 leading-snug">
+                {p.title}
+              </h3>
+              <p className="text-sm text-[#0B1F3A]/50 leading-relaxed">
+                {p.desc}
+              </p>
             </motion.div>
           ))}
         </div>

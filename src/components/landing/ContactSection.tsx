@@ -35,17 +35,20 @@ const contactInfo = [
     icon: Mail,
     label: 'Email',
     value: SITE_CONFIG.email,
-    action: 'Nous envoyer un e-mail',
+    action: 'Envoyer un e-mail',
     href: `mailto:${SITE_CONFIG.email}`,
-    iconBg: 'bg-white/10',
+    iconBg: 'bg-[#0B1F3A]',
     iconColor: 'text-white',
   },
 ]
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 sm:py-32 bg-[#0B1F3A] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="contact"
+      className="py-24 sm:py-32 bg-[#E8EEF6] border-t border-[#D4DEE8]"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -53,41 +56,41 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#E8871A]/10 border border-[#E8871A]/25 text-[#E8871A] text-xs font-bold tracking-[0.1em] uppercase mb-4">
-            Contact
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-            Parle à un conseiller
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A]">
+            Parlez directement
+            <br />
+            à un{' '}
+            <span className="text-[#E8871A]">conseiller expert.</span>
           </h2>
-          <p className="text-base text-white/50 max-w-xl mx-auto">
-            Prends rendez-vous avec un conseiller et bénéficie d&apos;un
-            accompagnement personnalisé.
-          </p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {contactInfo.map((info, i) => (
             <motion.a
               key={info.label}
               href={info.href}
               target={info.href.startsWith('http') ? '_blank' : undefined}
-              rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              rel={
+                info.href.startsWith('http')
+                  ? 'noopener noreferrer'
+                  : undefined
+              }
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex flex-col items-center text-center p-8 bg-[#112548] border border-white/10 rounded-2xl hover:border-[#E8871A]/25 hover:shadow-[0_0_30px_rgba(232,135,26,0.06)] hover:-translate-y-1 transition-all duration-500 group"
+              className="flex flex-col items-center text-center p-7 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 group"
             >
               <div
-                className={`w-14 h-14 rounded-2xl ${info.iconBg} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 mb-6`}
+                className={`w-12 h-12 rounded-xl ${info.iconBg} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300 mb-5`}
               >
-                <info.icon className={`w-6 h-6 ${info.iconColor}`} />
+                <info.icon className={`w-5 h-5 ${info.iconColor}`} />
               </div>
-              <h3 className="text-sm text-white/40 font-semibold uppercase tracking-wider mb-2">
+              <h3 className="text-xs text-[#0B1F3A]/35 font-semibold uppercase tracking-wider mb-2">
                 {info.label}
               </h3>
-              <p className="text-lg font-bold text-white mb-4 break-all">
+              <p className="text-sm font-bold text-[#0B1F3A] mb-4 break-all">
                 {info.value}
               </p>
               <span className="text-sm font-bold text-[#E8871A] mt-auto">
@@ -102,7 +105,7 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-2 mt-12 text-sm text-white/40 bg-[#112548] border border-white/10 rounded-full px-6 py-2.5 max-w-xs mx-auto"
+          className="flex items-center justify-center gap-2 mt-10 text-sm text-[#0B1F3A]/40"
         >
           <Clock className="w-4 h-4 text-[#E8871A]" />
           <span className="font-semibold">{SITE_CONFIG.hours}</span>

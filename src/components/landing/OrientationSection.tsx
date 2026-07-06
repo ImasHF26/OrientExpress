@@ -7,12 +7,33 @@ import { Loader2 } from 'lucide-react'
 
 const NIVEAUX = ['Bac', 'Bac+1', 'Bac+2', 'Bac+3', 'Bac+4', 'Bac+5']
 
+const FILIERES = [
+  'Droit privé',
+  'Droit public',
+  'Économie & Gestion',
+  'Sciences de la Matière Physique',
+  'Sciences de la Matière Chimie',
+  'Sciences de la Vie',
+  'Informatique / SMI',
+  'Mathématiques / SMA',
+  'Génie Civil',
+  'Génie Électrique',
+  'Génie Mécanique',
+  'Génie Informatique',
+  'Lettres & Sciences Humaines',
+  'Autre',
+]
+
+type TabType = 'licence' | 'master' | 'ingenieur'
+
 export default function OrientationSection() {
-  const [nom, setNom] = useState('')
+  const [activeTab, setActiveTab] = useState<TabType>('licence')
+  const [prenom, setPrenom] = useState('')
+  const [nomFamille, setNomFamille] = useState('')
   const [tel, setTel] = useState('')
   const [ville, setVille] = useState('')
-  const [niveau, setNiveau] = useState('')
   const [filiere, setFiliere] = useState('')
+  const [niveau, setNiveau] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -23,13 +44,20 @@ export default function OrientationSection() {
   const labelClass =
     'block text-xs font-bold tracking-[0.07em] uppercase text-white/65 mb-2'
 
+  const tabLabels: Record<TabType, string> = {
+    licence: 'Licence +3',
+    ingenieur: 'Écoles',
+    master: 'Master',
+  }
+
   const openWhatsApp = () => {
+    const fullName = `${prenom} ${nomFamille}`.trim()
     const msg = [
       'Bonjour CAP FUTURE MAROC 👋',
       '',
-      'Je souhaite une étude de dossier.',
+      `Je souhaite une étude de dossier (${tabLabels[activeTab]}).`,
       '',
-      `👤 Nom : ${nom}`,
+      `👤 Nom : ${fullName}`,
       `📍 Ville : ${ville}`,
       `🎓 Niveau : ${niveau}`,
       filiere ? `📚 Filière : ${filiere}` : '',
@@ -49,7 +77,9 @@ export default function OrientationSection() {
     e.preventDefault()
     setError('')
 
-    if (!nom.trim() || !tel.trim() || !ville.trim() || !niveau) {
+    const fullName = `${prenom} ${nomFamille}`.trim()
+
+    if (!fullName || !tel.trim() || !ville.trim() || !niveau) {
       setError('Merci de remplir tous les champs obligatoires.')
       return
     }
@@ -57,12 +87,11 @@ export default function OrientationSection() {
     setLoading(true)
 
     try {
-      // 1. Sauvegarder en base de données
       const res = await fetch('/api/inscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          nom: nom.trim(),
+          nom: fullName,
           telephone: tel.trim(),
           ville: ville.trim(),
           niveau,
@@ -73,17 +102,13 @@ export default function OrientationSection() {
       const data = await res.json()
 
       if (!res.ok) {
-        throw new Error(data.error || 'Erreur lors de l\'enregistrement.')
+        throw new Error(data.error || "Erreur lors de l'enregistrement.")
       }
 
-      // 2. Ouvrir WhatsApp
       openWhatsApp()
-
-      // 3. Afficher succès
       setSubmitted(true)
     } catch (err) {
       console.error('Erreur:', err)
-      // Même si la BDD échoue, on ouvre WhatsApp quand même
       openWhatsApp()
       setSubmitted(true)
     } finally {
@@ -105,7 +130,8 @@ export default function OrientationSection() {
             Demande envoyée !
           </h2>
           <p className="text-white/55 mb-3">
-            Votre profil a été enregistré avec succès, <strong className="text-white">{nom}</strong>.
+            Votre profil a été enregistré avec succès,{' '}
+            <strong className="text-white">{prenom}</strong>.
           </p>
           <p className="text-white/40 text-sm mb-6">
             Notre équipe vous contacte sous 24h. Si la conversation WhatsApp
@@ -114,11 +140,12 @@ export default function OrientationSection() {
           <button
             onClick={() => {
               setSubmitted(false)
-              setNom('')
+              setPrenom('')
+              setNomFamille('')
               setTel('')
               setVille('')
-              setNiveau('')
               setFiliere('')
+              setNiveau('')
             }}
             className="text-[#E8871A] font-semibold text-sm hover:underline"
           >
@@ -136,42 +163,75 @@ export default function OrientationSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-[#112548] border border-white/10 rounded-[20px] p-8 sm:p-[52px_48px] max-w-[620px] mx-auto relative overflow-hidden"
+        className="bg-[#112548] border border-white/10 rounded-[20px] p-8 sm:p-[48px] max-w-[660px] mx-auto relative overflow-hidden"
       >
         {/* Gold top bar */}
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#E8871A] to-[#F5A03C]" />
 
         {/* Header */}
-        <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-[14px]">
-          ✦ Audit &amp; Stratégie d&apos;Orientation
+        <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-3">
+          ✦ Consultation gratuite
         </div>
 
-        <h2 className="font-display text-[clamp(22px,3.5vw,32px)] font-bold text-white mb-3">
-          Un service d&apos;expertise dédié pour sécuriser votre parcours académique.
+        <h2 className="font-display text-[clamp(22px,3.5vw,30px)] font-bold text-white mb-2">
+          Dossier au millimètre —
+          <br />
+          commencez ici.
         </h2>
 
-        <p className="text-[15px] text-white/50 mb-8 leading-[1.7]">
+        <p className="text-[14px] text-white/50 mb-6 leading-[1.7]">
           Remplissez ce formulaire — notre équipe vous contacte sous 24h pour
           analyser votre profil.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-[18px]">
-          {/* Nom */}
-          <div>
-            <label className={labelClass}>👤 Nom complet</label>
-            <input
-              type="text"
-              value={nom}
-              onChange={(e) => setNom(e.target.value)}
-              placeholder="Ex : Mohammed El Amrani"
-              required
-              className={inputClass}
-            />
+        {/* Tabs */}
+        <div className="flex gap-2 mb-6">
+          {(Object.keys(tabLabels) as TabType[]).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+              className={`flex-1 py-2.5 px-3 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
+                activeTab === tab
+                  ? 'bg-[#E8871A] text-white shadow-[0_4px_16px_rgba(232,135,26,0.3)]'
+                  : 'bg-white/[0.06] border border-white/[0.1] text-white/40 hover:text-white/60'
+              }`}
+            >
+              {tabLabels[tab]}
+            </button>
+          ))}
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Prénom + Nom côte à côte */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className={labelClass}>Prénom</label>
+              <input
+                type="text"
+                value={prenom}
+                onChange={(e) => setPrenom(e.target.value)}
+                placeholder="Mohammed"
+                required
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Nom</label>
+              <input
+                type="text"
+                value={nomFamille}
+                onChange={(e) => setNomFamille(e.target.value)}
+                placeholder="El Amrani"
+                required
+                className={inputClass}
+              />
+            </div>
           </div>
 
           {/* Téléphone */}
           <div>
-            <label className={labelClass}>📱 Téléphone WhatsApp</label>
+            <label className={labelClass}>Téléphone (WhatsApp)</label>
             <input
               type="tel"
               value={tel}
@@ -184,7 +244,7 @@ export default function OrientationSection() {
 
           {/* Ville */}
           <div>
-            <label className={labelClass}>📍 Ville</label>
+            <label className={labelClass}>Ville</label>
             <input
               type="text"
               value={ville}
@@ -195,9 +255,35 @@ export default function OrientationSection() {
             />
           </div>
 
+          {/* Filière */}
+          <div>
+            <label className={labelClass}>Filière de la licence</label>
+            <select
+              value={filiere}
+              onChange={(e) => setFiliere(e.target.value)}
+              className={`${inputClass} appearance-none cursor-pointer`}
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 16px center',
+              }}
+            >
+              <option value="" className="bg-[#112548] text-white/50">
+                Choisissez votre filière…
+              </option>
+              {FILIERES.map((f) => (
+                <option key={f} value={f} className="bg-[#112548] text-white">
+                  {f}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Niveau — Pills */}
           <div>
-            <label className={labelClass}>🎓 Niveau d&apos;études actuel</label>
+            <label className={labelClass}>
+              Année d&apos;obtention du bac
+            </label>
             <div className="grid grid-cols-3 gap-2">
               {NIVEAUX.map((n) => (
                 <button
@@ -214,30 +300,6 @@ export default function OrientationSection() {
                 </button>
               ))}
             </div>
-
-            {/* Filière dynamique */}
-            <div
-              className={`overflow-hidden transition-all duration-400 ease-in-out ${
-                niveau ? 'max-h-[180px] opacity-100 mt-3.5' : 'max-h-0 opacity-0 mt-0'
-              }`}
-            >
-              <div className="bg-[#E8871A]/[0.07] border border-[#E8871A]/[0.22] rounded-[10px] p-4">
-                <label className="block text-[11px] font-bold tracking-[0.08em] uppercase text-[#E8871A] mb-2">
-                  ✏️ Précisez votre filière actuelle
-                </label>
-                <input
-                  type="text"
-                  value={filiere}
-                  onChange={(e) => setFiliere(e.target.value)}
-                  placeholder="Ex : Droit privé, Économie, Informatique, Génie civil…"
-                  className="w-full bg-white/[0.06] border border-[#E8871A]/[0.22] rounded-lg px-4 py-[13px] text-sm text-white outline-none font-sans placeholder:text-white/30 focus:border-[#E8871A]"
-                />
-                <p className="text-xs text-[#E8871A]/60 mt-[7px] italic leading-[1.5]">
-                  « Hadi important bzzaf — précisez le plus possible pour une
-                  analyse complète. »
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Error */}
@@ -251,7 +313,7 @@ export default function OrientationSection() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-[18px] bg-[#E8871A] text-white font-sans text-base font-bold border-none rounded-[10px] cursor-pointer mt-2 shadow-[0_8px_32px_rgba(232,135,26,0.4)] tracking-[0.02em] hover:bg-[#F5A03C] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+            className="w-full py-[16px] bg-[#E8871A] text-white font-sans text-sm font-bold border-none rounded-[10px] cursor-pointer mt-2 shadow-[0_8px_32px_rgba(232,135,26,0.4)] tracking-[0.02em] hover:bg-[#F5A03C] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
@@ -259,7 +321,7 @@ export default function OrientationSection() {
                 Enregistrement en cours…
               </>
             ) : (
-              'Valider mon profil et lancer mon orientation →'
+              'Valider mon profil et réserver mon étude de dossier →'
             )}
           </button>
         </form>
