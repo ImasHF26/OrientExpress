@@ -1,35 +1,35 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Quote, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 
 const testimonials = [
   {
-    name: 'Fatima Zahra',
-    parcours: 'Licence Éco → Master ENCG Kénitra',
-    text: "J'hésitais entre 5 écoles sans savoir laquelle choisir. CAP FUTURE a analysé mon dossier et m'a orientée vers l'ENCG. Aujourd'hui je suis en Master Marketing et je suis ravie de mon parcours !",
-    initial: 'FZ',
-    gradient: 'from-[#E8871A] to-[#F5A03C]',
+    text: "J'hésitais entre dix Masters sans savoir lequel choisir. CAP FUTURE a analysé mon dossier en profondeur et m'a guidé vers l'ENCG. Admis en 18 jours — je n'y croyais pas.",
+    name: 'Youssef Kannouni',
+    info: 'Licence en économie · Casablanca',
+    initial: 'Y.K',
+    avatarBg: 'bg-[#0B1F3A]',
   },
   {
-    name: 'Youssef M.',
-    parcours: 'Licence Info → Master ENSA Rabat',
-    text: "Grâce à CAP FUTURE, mon dossier était blindé. Lettre de motivation, préparation à l'entretien — tout était carré. J'ai été admis du premier coup, sans stress.",
-    initial: 'Y',
-    gradient: 'from-[#0B1F3A] to-[#1a3a5c]',
+    text: "Deux refus consécutifs avant CAP FUTURE. Ils m'ont réorienté vers un Master d'ingénierie reconnu et m'ont aidée à préparer l'entretien. Aujourd'hui j'y suis — et je les recommande à tous.",
+    name: 'Nadia Mernissi',
+    info: 'Licence en sciences · Marrakech',
+    initial: 'N.M',
+    avatarBg: 'bg-gradient-to-br from-[#E8871A] to-[#d97b15]',
   },
   {
-    name: 'Amina K.',
-    parcours: 'Licence SVT → Master FST Fès',
-    text: "Je pensais que le Master c'était impossible pour moi. CAP FUTURE m'a prouvé le contraire. En 4 jours ils avaient analysé mon dossier, et en 3 semaines j'étais admise !",
-    initial: 'A',
-    gradient: 'from-[#E8871A] to-[#d97b15]',
+    text: "Ce qui m'a marqué, c'est leur honnêteté. Pas de fausses promesses — des chiffres, une stratégie, et un suivi réel. Intégré un MBA accrédité et je postule déjà à des postes d'encadrement.",
+    name: 'Omar Benali',
+    info: 'Licence FSJES · Fès',
+    initial: 'O.B',
+    avatarBg: 'bg-[#0B1F3A]',
   },
 ]
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-[#E8EEF6] py-24 sm:py-32 border-t border-[#D4DEE8]">
+    <section className="bg-[#E8EEF6] py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -38,10 +38,13 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           className="mb-16"
         >
+          <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-3 block">
+            ☽ Ils témoignent
+          </span>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A] leading-tight">
             Ce ne sont pas nos mots —
             <br />
-            <span className="text-[#E8871A]">ce sont les leurs.</span>
+            <span className="text-[#E8871A] italic">ce sont les leurs.</span>
           </h2>
         </motion.div>
 
@@ -57,7 +60,7 @@ export default function TestimonialsSection() {
               className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 flex flex-col"
             >
               {/* Stars */}
-              <div className="flex gap-0.5 mb-4">
+              <div className="flex gap-0.5 mb-5">
                 {Array.from({ length: 5 }).map((_, j) => (
                   <Star
                     key={j}
@@ -67,14 +70,14 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Quote */}
-              <p className="text-sm text-[#0B1F3A]/60 leading-relaxed flex-1 mb-6">
-                &ldquo;{t.text}&rdquo;
+              <p className="text-[14px] text-[#0B1F3A]/60 leading-[1.75] flex-1 mb-6">
+                {t.text}
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
                 <div
-                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white font-bold text-sm`}
+                  className={`w-10 h-10 rounded-full ${t.avatarBg} flex items-center justify-center text-white font-bold text-xs`}
                 >
                   {t.initial}
                 </div>
@@ -82,7 +85,7 @@ export default function TestimonialsSection() {
                   <p className="font-semibold text-[#0B1F3A] text-sm">
                     {t.name}
                   </p>
-                  <p className="text-xs text-[#0B1F3A]/40">{t.parcours}</p>
+                  <p className="text-xs text-[#0B1F3A]/40">{t.info}</p>
                 </div>
               </div>
             </motion.div>
