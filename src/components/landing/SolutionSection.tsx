@@ -1,32 +1,35 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Search, Target, Rocket, ShieldCheck } from 'lucide-react'
+import { Search, Trophy, FileText, ShieldCheck } from 'lucide-react'
 
 const steps = [
   {
-    num: '1',
     icon: Search,
-    title: 'Diagnostic précis de votre profil',
-    desc: "On analyse votre parcours, vos notes, vos ambitions et vos contraintes. On identifie vos points forts et les Masters/écoles où vous avez les meilleures chances.",
+    iconBg: 'bg-[#1a3a5c]',
+    iconColor: 'text-cyan-400',
+    title: 'Diagnostic complet du profil',
+    desc: "Analyse de vos points forts, identification des lacunes, et stratégie de présentation optimale face aux commissions de sélection.",
   },
   {
-    num: '2',
-    icon: Target,
-    title: 'Sélection des bons établissements',
-    desc: "On sélectionne uniquement les programmes qui matchent réellement avec votre profil. Pas de candidatures au hasard — chaque dossier est ciblé et optimisé.",
+    icon: Trophy,
+    iconBg: 'bg-[#3a2a1a]',
+    iconColor: 'text-[#E8871A]',
+    title: 'Sélection des bons programmes',
+    desc: "Masters classiques, professionnalisants, Écoles d'ingénieurs — uniquement des formations accréditées qui ouvrent vers des postes d'encadrement.",
   },
   {
-    num: '3',
-    icon: Rocket,
-    title: "Accompagnement de A à Z",
-    desc: "Dossier de candidature, lettre de motivation, préparation aux entretiens et concours — on vous accompagne jusqu'à l'admission confirmée.",
+    icon: FileText,
+    iconBg: 'bg-[#2a2a1a]',
+    iconColor: 'text-orange-400',
+    title: 'Accompagnement de A à Z',
+    desc: "Lettre de motivation, dossier administratif, préparation à l'entretien oral — nous sommes à vos côtés jusqu'à la lettre d'admission.",
   },
 ]
 
 export default function SolutionSection() {
   return (
-    <section className="bg-[#E8EEF6] py-24 sm:py-32 border-t border-[#D4DEE8]">
+    <section className="bg-[#0B1F3A] py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -36,12 +39,14 @@ export default function SolutionSection() {
           className="mb-16"
         >
           <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-3 block">
-            Notre méthode
+            ✦ Notre solution
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A] leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
             CAP FUTURE MAROC —
             <br />
-            <span className="text-[#E8871A]">le dossier au millimètre.</span>
+            <span className="text-[#E8871A] italic">
+              le dossier au millimètre.
+            </span>
           </h2>
         </motion.div>
 
@@ -49,26 +54,24 @@ export default function SolutionSection() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           {steps.map((s, i) => (
             <motion.div
-              key={s.num}
+              key={s.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 group"
+              className="bg-[#112548] border border-white/10 rounded-2xl p-7 hover:border-white/15 transition-all duration-500 group"
             >
-              {/* Step number */}
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-[#E8871A]/10 flex items-center justify-center group-hover:bg-[#E8871A]/15 group-hover:scale-110 transition-all duration-300">
-                  <s.icon className="w-5 h-5 text-[#E8871A]" />
-                </div>
-                <span className="text-xs font-bold tracking-[0.1em] uppercase text-[#0B1F3A]/30">
-                  Étape {s.num}
-                </span>
+              {/* Icon */}
+              <div
+                className={`w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center mb-6`}
+              >
+                <s.icon className={`w-5 h-5 ${s.iconColor}`} />
               </div>
-              <h3 className="text-lg font-bold text-[#0B1F3A] mb-3 leading-snug">
+
+              <h3 className="font-display text-[18px] font-bold text-white mb-3 leading-snug">
                 {s.title}
               </h3>
-              <p className="text-sm text-[#0B1F3A]/50 leading-relaxed">
+              <p className="text-[14px] text-white/45 leading-[1.75]">
                 {s.desc}
               </p>
             </motion.div>
@@ -80,21 +83,19 @@ export default function SolutionSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[#0B1F3A] rounded-2xl p-6 sm:p-8 flex items-start gap-5"
+          className="bg-[#112548] border border-white/10 rounded-2xl p-7 sm:p-8"
         >
-          <div className="w-12 h-12 rounded-xl bg-[#E8871A]/15 flex items-center justify-center shrink-0">
-            <ShieldCheck className="w-6 h-6 text-[#E8871A]" />
+          <div className="w-12 h-12 rounded-xl bg-[#1a3a5c] flex items-center justify-center mb-5">
+            <ShieldCheck className="w-6 h-6 text-blue-400" />
           </div>
-          <div>
-            <h3 className="font-display text-lg font-bold text-white mb-1.5">
-              Garantie de résultat
-            </h3>
-            <p className="text-sm text-white/50 leading-relaxed">
-              Si nous estimons pouvoir vous accompagner et que vous n&apos;obtenez
-              pas d&apos;admission, nous vous remboursons intégralement. C&apos;est
-              notre engagement — zéro risque pour vous.
-            </p>
-          </div>
+          <h3 className="font-display text-xl font-bold text-[#E8871A] mb-2">
+            Garantie de résultat
+          </h3>
+          <p className="text-[14px] text-white/50 leading-[1.75]">
+            Si les conditions convenues ne sont pas atteintes, nous reprenons le
+            travail gratuitement. Zéro risque de votre côté — notre engagement,
+            c&apos;est votre admission.
+          </p>
         </motion.div>
       </div>
     </section>
