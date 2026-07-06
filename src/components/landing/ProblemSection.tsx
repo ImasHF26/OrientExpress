@@ -1,32 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { AlertTriangle, Puzzle, Clock } from 'lucide-react'
 
 const problems = [
   {
-    icon: AlertTriangle,
-    num: '01',
-    title: 'Un marché très compétitif et saturé',
-    desc: "Chaque année, des milliers de candidats visent les mêmes Masters. Sans une stratégie précise, votre dossier risque de se perdre dans la masse et de passer inaperçu face aux commissions d'admission.",
-    color: 'text-red-500',
-    bg: 'bg-red-500/10',
+    num: '1',
+    title: 'Les masters non reconnus',
+    desc: "Au Maroc, tous les masters ne se valent pas. Certains sont sans accréditation nationale, sans débouchés réels — et vous laissent avec un diplôme sans valeur sur le marché de l'emploi. Une seule erreur et vous perdez deux ans.",
   },
   {
-    icon: Puzzle,
-    num: '02',
-    title: 'La complexité des écoles et des procédures',
-    desc: "Entre les conditions d'admission, les dates limites, les concours, les dossiers de candidature et les entretiens, il est facile de rater une étape ou de mal préparer son dossier.",
-    color: 'text-orange-500',
-    bg: 'bg-orange-500/10',
+    num: '2',
+    title: 'La complexité des seuils de sélection',
+    desc: "Chaque programme a ses propres critères : mention, filière, lettre de motivation, entretien oral… Sans stratégie précise, vous candidatez dans le vide — et vous essuyez des refus que vous n'aviez pas anticipés.",
   },
   {
-    icon: Clock,
-    num: '03',
-    title: 'Le temps perdu et les mauvais choix',
-    desc: "Beaucoup d'étudiants perdent des mois à s'orienter seuls, postulent aux mauvais programmes, et finissent par rater les deadlines critiques — une année entière perdue.",
-    color: 'text-amber-600',
-    bg: 'bg-amber-500/10',
+    num: '3',
+    title: 'Le temps perdu est irrécupérable',
+    desc: "Une candidature ratée, des délais manqués, une année blanche. Chaque mois d'attente est un mois de moins dans votre carrière. Le coût d'une mauvaise décision aujourd'hui se paie pendant des années.",
   },
 ]
 
@@ -44,7 +34,7 @@ export default function ProblemSection() {
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A] leading-tight">
             Votre licence en main —
             <br />
-            <span className="text-[#E8871A]">
+            <span className="text-[#E8871A] italic">
               mais les pièges sont nombreux.
             </span>
           </h2>
@@ -58,26 +48,31 @@ export default function ProblemSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 group"
+              transition={{ delay: i * 0.12 }}
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 overflow-hidden flex"
             >
-              {/* Badge */}
-              <div className="flex items-center gap-2 mb-5">
-                <span
-                  className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.1em] uppercase ${p.color}`}
-                >
-                  <span className={`w-2 h-2 rounded-full ${p.bg} ${p.color}`}>
-                    <span className={`block w-2 h-2 rounded-full ${p.color.replace('text-', 'bg-')}`} />
+              {/* Red left border */}
+              <div className="w-[4px] shrink-0 bg-gradient-to-b from-red-400 via-red-500 to-red-600" />
+
+              {/* Content */}
+              <div className="p-7">
+                {/* Badge */}
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-[18px] h-[18px] rounded-full bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center">
+                    <span className="block w-[6px] h-[1.5px] bg-white rounded-full" />
                   </span>
-                  Problème n°{p.num}
-                </span>
+                  <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#0B1F3A]/40">
+                    Risque n°{p.num}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-[18px] font-bold text-[#0B1F3A] mb-3 leading-snug">
+                  {p.title}
+                </h3>
+                <p className="text-[14px] text-[#0B1F3A]/45 leading-[1.75]">
+                  {p.desc}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#0B1F3A] mb-3 leading-snug">
-                {p.title}
-              </h3>
-              <p className="text-sm text-[#0B1F3A]/50 leading-relaxed">
-                {p.desc}
-              </p>
             </motion.div>
           ))}
         </div>
