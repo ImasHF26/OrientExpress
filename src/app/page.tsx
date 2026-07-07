@@ -3,9 +3,11 @@
 import Navbar from '@/components/landing/Navbar'
 import Hero from '@/components/landing/Hero'
 import OrientationSection from '@/components/landing/OrientationSection'
+import WhyUsSection from '@/components/landing/WhyUsSection'
 import ProblemSection from '@/components/landing/ProblemSection'
 import SolutionSection from '@/components/landing/SolutionSection'
 import TestimonialsSection from '@/components/landing/TestimonialsSection'
+import FAQSection from '@/components/landing/FAQSection'
 import CTAFinal from '@/components/landing/CTAFinal'
 import ContactSection from '@/components/landing/ContactSection'
 import Footer from '@/components/landing/Footer'
@@ -18,9 +20,11 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <OrientationSection />
+        <WhyUsSection />
         <ProblemSection />
         <SolutionSection />
         <TestimonialsSection />
+        <FAQSection />
         <CTAFinal />
         <ContactSection />
       </main>

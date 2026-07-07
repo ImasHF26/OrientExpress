@@ -1,100 +1,125 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Search, Trophy, FileText, ShieldCheck } from 'lucide-react'
+import { CalendarCheck, Search, Target, FileEdit, UserCheck, ShieldCheck } from 'lucide-react'
 
 const steps = [
   {
+    num: '1',
+    icon: CalendarCheck,
+    title: 'Réservation',
+    desc: 'Vous prenez rendez-vous avec un conseiller CAP FUTURE MAROC.',
+  },
+  {
+    num: '2',
     icon: Search,
-    iconBg: 'bg-[#1a3a5c]',
-    iconColor: 'text-cyan-400',
-    title: 'Diagnostic complet du profil',
-    desc: "Analyse de vos points forts, identification des lacunes, et stratégie de présentation optimale face aux commissions de sélection.",
+    title: 'Analyse',
+    desc: 'Nous étudions votre parcours académique, votre profil et vos objectifs.',
   },
   {
-    icon: Trophy,
-    iconBg: 'bg-[#3a2a1a]',
-    iconColor: 'text-[#E8871A]',
-    title: 'Sélection des bons programmes',
-    desc: "Masters classiques, professionnalisants, Écoles d'ingénieurs — uniquement des formations accréditées qui ouvrent vers des postes d'encadrement.",
+    num: '3',
+    icon: Target,
+    title: 'Orientation',
+    desc: "Nous sélectionnons les Masters, Écoles ou Licences Professionnelles les plus adaptés à votre dossier.",
   },
   {
-    icon: FileText,
-    iconBg: 'bg-[#2a2a1a]',
-    iconColor: 'text-orange-400',
-    title: 'Accompagnement de A à Z',
-    desc: "Lettre de motivation, dossier administratif, préparation à l'entretien oral — nous sommes à vos côtés jusqu'à la lettre d'admission.",
+    num: '4',
+    icon: FileEdit,
+    title: 'Préparation',
+    desc: "Nous vous accompagnons dans la préparation de votre dossier, de votre lettre de motivation et de votre entretien.",
+  },
+  {
+    num: '5',
+    icon: UserCheck,
+    title: 'Suivi',
+    desc: "Nous restons à vos côtés jusqu'à la finalisation de vos candidatures.",
   },
 ]
 
 export default function SolutionSection() {
   return (
     <section className="bg-[#0B1F3A] py-24 sm:py-32">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16"
         >
           <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-3 block">
-            ✦ Notre solution
+            Notre méthode
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
-            CAP FUTURE MAROC —
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            Comment se déroule
             <br />
             <span className="text-[#E8871A] italic">
-              le dossier au millimètre.
+              votre accompagnement ?
             </span>
           </h2>
         </motion.div>
 
-        {/* Steps */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              className="bg-[#112548] border border-white/10 rounded-2xl p-7 hover:border-white/15 transition-all duration-500 group"
-            >
-              {/* Icon */}
-              <div
-                className={`w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center mb-6`}
-              >
-                <s.icon className={`w-5 h-5 ${s.iconColor}`} />
-              </div>
+        {/* Steps — vertical timeline */}
+        <div className="relative max-w-2xl mx-auto">
+          {/* Vertical line */}
+          <div className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-px bg-gradient-to-b from-[#E8871A]/40 via-[#E8871A]/20 to-transparent" />
 
-              <h3 className="font-display text-[18px] font-bold text-white mb-3 leading-snug">
-                {s.title}
-              </h3>
-              <p className="text-[14px] text-white/45 leading-[1.75]">
-                {s.desc}
-              </p>
-            </motion.div>
-          ))}
+          <div className="space-y-2">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="relative flex gap-5 sm:gap-6 group"
+              >
+                {/* Step circle */}
+                <div className="relative z-10 shrink-0">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#112548] border border-[#E8871A]/20 flex items-center justify-center group-hover:border-[#E8871A]/40 group-hover:bg-[#E8871A]/10 transition-all duration-500">
+                    <s.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#E8871A]" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="pb-8 pt-1 flex-1">
+                  <span className="text-[11px] font-bold tracking-wider uppercase text-[#E8871A]/50 block mb-1">
+                    Étape {s.num}
+                  </span>
+                  <h3 className="font-display text-lg font-bold text-white mb-1.5">
+                    {s.title}
+                  </h3>
+                  <p className="text-[14px] text-white/40 leading-relaxed">
+                    {s.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        {/* Guarantee Banner */}
+        {/* Engagement banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[#112548] border border-white/10 rounded-2xl p-7 sm:p-8"
+          className="mt-16 bg-[#112548] border border-white/[0.08] rounded-2xl p-8 sm:p-10 text-center max-w-3xl mx-auto"
         >
-          <div className="w-12 h-12 rounded-xl bg-[#1a3a5c] flex items-center justify-center mb-5">
-            <ShieldCheck className="w-6 h-6 text-blue-400" />
+          <div className="w-14 h-14 rounded-2xl bg-[#E8871A]/10 flex items-center justify-center mx-auto mb-5">
+            <ShieldCheck className="w-7 h-7 text-[#E8871A]" />
           </div>
-          <h3 className="font-display text-xl font-bold text-[#E8871A] mb-2">
-            Garantie de résultat
+          <h3 className="font-display text-xl font-bold text-white mb-2">
+            Notre engagement
           </h3>
-          <p className="text-[14px] text-white/50 leading-[1.75]">
-            Si les conditions convenues ne sont pas atteintes, nous reprenons le
-            travail gratuitement. Zéro risque de votre côté — notre engagement,
-            c&apos;est votre admission.
+          <p className="text-[15px] text-white/60 font-medium mb-3">
+            Votre réussite est notre priorité.
+          </p>
+          <p className="text-[14px] text-white/40 leading-relaxed max-w-lg mx-auto">
+            Nous mettons tout en œuvre pour vous proposer une stratégie
+            d&apos;admission personnalisée, adaptée à votre profil et à vos
+            ambitions. Notre accompagnement repose sur la transparence, le
+            professionnalisme et une parfaite connaissance des procédures
+            d&apos;admission.
           </p>
         </motion.div>
       </div>

@@ -1,28 +1,30 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { AlertTriangle } from 'lucide-react'
 
-const problems = [
+const errors = [
   {
     num: '1',
-    title: 'Les masters non reconnus',
-    desc: "Au Maroc, tous les masters ne se valent pas. Certains sont sans accréditation nationale, sans débouchés réels — et vous laissent avec un diplôme sans valeur sur le marché de l'emploi. Une seule erreur et vous perdez deux ans.",
+    title: 'Choisir une formation qui ne correspond pas à votre projet.',
+    desc: "Toutes les formations n'offrent pas les mêmes perspectives. Un mauvais choix peut ralentir votre évolution professionnelle et vous faire perdre un temps précieux.",
   },
   {
     num: '2',
-    title: 'La complexité des seuils de sélection',
-    desc: "Chaque programme a ses propres critères : mention, filière, lettre de motivation, entretien oral… Sans stratégie précise, vous candidatez dans le vide — et vous essuyez des refus que vous n'aviez pas anticipés.",
+    title: 'Candidater sans stratégie.',
+    desc: "Chaque établissement possède ses propres critères de sélection : mention, filière, dossier académique, lettre de motivation, entretien. Une candidature bien préparée augmente considérablement vos chances d'admission.",
+    criteria: ['Mention', 'Filière', 'Dossier académique', 'Lettre de motivation', 'Entretien'],
   },
   {
     num: '3',
-    title: 'Le temps perdu est irrécupérable',
-    desc: "Une candidature ratée, des délais manqués, une année blanche. Chaque mois d'attente est un mois de moins dans votre carrière. Le coût d'une mauvaise décision aujourd'hui se paie pendant des années.",
+    title: "Perdre une année par manque d'information.",
+    desc: "Une échéance oubliée. Un dossier incomplet. Une mauvaise orientation. Quelques erreurs suffisent parfois pour repousser votre projet d'études d'une année entière.",
   },
 ]
 
 export default function ProblemSection() {
   return (
-    <section className="bg-[#E8EEF6] py-24 sm:py-32">
+    <section className="bg-[#E8EEF6] py-24 sm:py-32 border-t border-[#D4DEE8]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -32,45 +34,45 @@ export default function ProblemSection() {
           className="mb-16"
         >
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A] leading-tight">
-            Votre licence en main —
+            Les erreurs qui peuvent
             <br />
             <span className="text-[#E8871A] italic">
-              mais les pièges sont nombreux.
+              compromettre votre avenir
             </span>
           </h2>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {problems.map((p, i) => (
+        <div className="space-y-6">
+          {errors.map((err, i) => (
             <motion.div
-              key={p.num}
+              key={err.num}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-500 overflow-hidden flex"
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex hover:shadow-md transition-shadow duration-500"
             >
-              {/* Red left border */}
-              <div className="w-[4px] shrink-0 bg-gradient-to-b from-red-400 via-red-500 to-red-600" />
+              {/* Red left bar */}
+              <div className="w-[4px] shrink-0 bg-gradient-to-b from-amber-400 via-orange-500 to-red-500" />
 
-              {/* Content */}
-              <div className="p-7">
+              <div className="p-7 sm:p-8 flex-1">
                 {/* Badge */}
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="w-[18px] h-[18px] rounded-full bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center">
-                    <span className="block w-[6px] h-[1.5px] bg-white rounded-full" />
-                  </span>
-                  <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#0B1F3A]/40">
-                    Risque n°{p.num}
+                  <div className="w-7 h-7 rounded-lg bg-red-500/10 flex items-center justify-center">
+                    <AlertTriangle className="w-4 h-4 text-red-500" />
+                  </div>
+                  <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#0B1F3A]/35">
+                    Erreur n°{err.num}
                   </span>
                 </div>
 
-                <h3 className="font-display text-[18px] font-bold text-[#0B1F3A] mb-3 leading-snug">
-                  {p.title}
+                <h3 className="font-display text-lg font-bold text-[#0B1F3A] mb-3">
+                  {err.title}
                 </h3>
-                <p className="text-[14px] text-[#0B1F3A]/45 leading-[1.75]">
-                  {p.desc}
+
+                <p className="text-[14px] text-[#0B1F3A]/45 leading-[1.8]">
+                  {err.desc}
                 </p>
               </div>
             </motion.div>

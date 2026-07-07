@@ -70,7 +70,7 @@ export default function Navbar() {
                 onClick={() => scrollTo('#consultation')}
                 className="ml-3 bg-[#E8871A] text-white font-semibold text-[13px] px-[22px] py-[10px] rounded-full hover:bg-[#F5A03C] shadow-[0_4px_20px_rgba(232,135,26,0.3)] transition-all duration-200"
               >
-                Réserver mon orientation →
+                Réserver ma consultation →
               </button>
             </div>
 
@@ -116,7 +116,7 @@ export default function Navbar() {
                 onClick={() => scrollTo('#consultation')}
                 className="mt-6 w-full bg-[#E8871A] text-white font-semibold text-base py-4 rounded-full hover:bg-[#F5A03C] shadow-[0_4px_20px_rgba(232,135,26,0.3)]"
               >
-                Réserver mon orientation →
+                Réserver ma consultation →
               </button>
             </div>
           </motion.div>

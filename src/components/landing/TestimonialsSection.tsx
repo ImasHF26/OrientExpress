@@ -5,23 +5,23 @@ import { Star } from 'lucide-react'
 
 const testimonials = [
   {
-    text: "J'hésitais entre dix Masters sans savoir lequel choisir. CAP FUTURE a analysé mon dossier en profondeur et m'a guidé vers l'ENCG. Admis en 18 jours — je n'y croyais pas.",
-    name: 'Youssef Kannouni',
-    info: 'Licence en économie · Casablanca',
+    name: 'Youssef K.',
+    info: 'Licence en Économie – Casablanca',
+    text: "Grâce à CAP FUTURE MAROC, j'ai enfin trouvé un Master parfaitement adapté à mon profil. L'accompagnement était clair, professionnel et rassurant.",
     initial: 'Y.K',
     avatarBg: 'bg-[#0B1F3A]',
   },
   {
-    text: "Deux refus consécutifs avant CAP FUTURE. Ils m'ont réorienté vers un Master d'ingénierie reconnu et m'ont aidée à préparer l'entretien. Aujourd'hui j'y suis — et je les recommande à tous.",
-    name: 'Nadia Mernissi',
-    info: 'Licence en sciences · Marrakech',
+    name: 'Nadia M.',
+    info: 'Licence Sciences – Marrakech',
+    text: "J'étais complètement perdue après ma licence. Grâce aux conseils reçus, j'ai pu préparer un dossier solide et intégrer le Master que je souhaitais.",
     initial: 'N.M',
     avatarBg: 'bg-gradient-to-br from-[#E8871A] to-[#d97b15]',
   },
   {
-    text: "Ce qui m'a marqué, c'est leur honnêteté. Pas de fausses promesses — des chiffres, une stratégie, et un suivi réel. Intégré un MBA accrédité et je postule déjà à des postes d'encadrement.",
-    name: 'Omar Benali',
-    info: 'Licence FSJES · Fès',
+    name: 'Omar B.',
+    info: 'Licence FSJES – Fès',
+    text: "Une équipe sérieuse, disponible et à l'écoute. Leur accompagnement m'a permis de postuler avec confiance.",
     initial: 'O.B',
     avatarBg: 'bg-[#0B1F3A]',
   },
@@ -36,15 +36,13 @@ export default function TestimonialsSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16"
         >
           <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#E8871A] mb-3 block">
-            ☽ Ils témoignent
+            Ils nous font confiance
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A] leading-tight">
-            Ce ne sont pas nos mots —
-            <br />
-            <span className="text-[#E8871A] italic">ce sont les leurs.</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1F3A]">
+            Témoignages
           </h2>
         </motion.div>
 
@@ -70,8 +68,8 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Quote */}
-              <p className="text-[14px] text-[#0B1F3A]/60 leading-[1.75] flex-1 mb-6">
-                {t.text}
+              <p className="text-[14px] text-[#0B1F3A]/55 leading-[1.8] flex-1 mb-6">
+                &ldquo;{t.text}&rdquo;
               </p>
 
               {/* Author */}
