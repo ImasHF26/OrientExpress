@@ -16,27 +16,50 @@ const NIVEAUX = [
   'Licence Fondamentale',
   'Licence Professionnelle',
   "Licence d'excellence",
-  "Licence d'Université Spécialisé (LUS)",
+  "Licence d'Université Spécialisée (LUS)",
   'Bac+4',
   'Autre',
 ]
 
-const FILIERES = [
-  'Droit privé',
-  'Droit public',
-  'Économie & Gestion',
+const SPECIALITES_BAC = [
+  'Sciences Mathématiques A (SMA)',
+  'Sciences Mathématiques B (SMB)',
+  'Sciences Physiques (PC)',
+  'Sciences de la Vie et de la Terre (SVT)',
+  'Sciences Économiques',
+  'Sciences de Gestion Comptable (SGC)',
+  'Sciences Humaines',
+  'Lettres',
+  'Autre',
+]
+
+const SPECIALITES_BAC2 = [
+  'Gestion des Entreprises',
+  'Finance et Comptabilité',
+  'Gestion des Ressources Humaines',
+  'Secrétariat de Direction',
+  'Commerce et Marketing',
+  'Logistique',
+  'Management des Organisations',
+  'Développement Digital',
+  'Réseaux Informatiques',
+  'Cybersécurité',
+  'Intelligence Artificielle',
+  'Autre',
+]
+
+const SPECIALITES_BAC3 = [
+  'Sciences Économiques et Gestion',
+  'Comptabilité Finance et Fiscalité',
+  'Management des Organisations',
+  'Commerce et Marketing',
+  'Management des Ressources Humaines',
+  'Management Logistique',
+  'Audit et Contrôle de Gestion',
+  'Sciences de la Vie et de la Terre',
   'Sciences de la Matière Physique',
-  'Sciences de la Matière Chimie',
-  'Sciences de la Vie',
-  'Informatique / SMI',
-  'Mathématiques / SMA',
-  'Génie Civil',
-  'Génie Électrique',
-  'Génie Mécanique',
-  'Génie Informatique',
-  'Commerce & Marketing',
-  'Comptabilité & Finance',
-  'Lettres & Sciences Humaines',
+  'Sciences Mathématiques et Informatique',
+  'Droit',
   'Autre',
 ]
 
@@ -53,6 +76,24 @@ export default function OrientationSection() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const getFiliereOptions = () => {
+    if (niveau === 'Bac') return SPECIALITES_BAC
+    if (['Bac+2 OFPPT', 'BTS', 'DUT', 'EST', 'Bac+2 Privé', 'DEUG'].includes(niveau)) {
+      return SPECIALITES_BAC2
+    }
+    if (niveau) {
+      return SPECIALITES_BAC3
+    }
+    return []
+  }
+
+  const filiereOptions = getFiliereOptions()
+
+  const handleNiveauChange = (val: string) => {
+    setNiveau(val)
+    setFiliere('')
+  }
 
   const inputClass =
     'w-full bg-white/[0.05] border border-white/[0.1] rounded-xl px-4 py-3.5 text-[15px] text-white outline-none font-sans placeholder:text-white/25 transition-all duration-200 focus:border-[#E8871A] focus:shadow-[0_0_0_3px_rgba(232,135,26,0.12)] hover:border-white/[0.18]'
@@ -284,7 +325,7 @@ export default function OrientationSection() {
                   </label>
                   <select
                     value={niveau}
-                    onChange={(e) => setNiveau(e.target.value)}
+                    onChange={(e) => handleNiveauChange(e.target.value)}
                     required
                     className={selectClass}
                     style={selectStyle}
@@ -305,13 +346,14 @@ export default function OrientationSection() {
                   <select
                     value={filiere}
                     onChange={(e) => setFiliere(e.target.value)}
-                    className={selectClass}
+                    disabled={!niveau}
+                    className={`${selectClass} ${!niveau ? 'opacity-50 cursor-not-allowed' : ''}`}
                     style={selectStyle}
                   >
                     <option value="" className="bg-[#112548]">
-                      Sélectionnez votre filière…
+                      {niveau ? 'Sélectionnez votre filière…' : "Sélectionnez d'abord votre niveau…"}
                     </option>
-                    {FILIERES.map((f) => (
+                    {filiereOptions.map((f) => (
                       <option key={f} value={f} className="bg-[#112548]">
                         {f}
                       </option>
