@@ -2,7 +2,9 @@
 
 import Navbar from '@/components/landing/Navbar'
 import Hero from '@/components/landing/Hero'
+import VideoSection from '@/components/landing/VideoSection'
 import OrientationSection from '@/components/landing/OrientationSection'
+import DomainesSection from '@/components/landing/DomainesSection'
 import WhyUsSection from '@/components/landing/WhyUsSection'
 import ProblemSection from '@/components/landing/ProblemSection'
 import SolutionSection from '@/components/landing/SolutionSection'
@@ -19,7 +21,9 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <VideoSection />
         <OrientationSection />
+        <DomainesSection />
         <WhyUsSection />
         <ProblemSection />
         <SolutionSection />
