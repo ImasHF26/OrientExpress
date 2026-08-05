@@ -7,8 +7,8 @@ import { useState } from 'react'
 export default function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false)
 
-  // Replace this with your actual YouTube/Vimeo embed URL
-  const videoEmbedUrl = ''
+  // Local video file in public directory
+  const videoSrc = '/BAC_2 UPDATED.mp4'
 
   return (
     <section className="bg-[#0d2340] py-20 sm:py-24 border-t border-white/[0.04]">
@@ -25,7 +25,7 @@ export default function VideoSection() {
           </span>
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
             Votre orientation en{' '}
-            <span className="text-[#E8871A] italic">45 secondes.</span>
+            <span className="text-[#E8871A] italic">quelques secondes.</span>
           </h2>
         </motion.div>
 
@@ -35,23 +35,24 @@ export default function VideoSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="relative aspect-video rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-black/30 group"
+          className="relative aspect-video rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-black/30 group bg-black"
         >
-          {videoEmbedUrl && isPlaying ? (
-            /* === Actual video embed === */
-            <iframe
-              src={videoEmbedUrl}
-              className="absolute inset-0 w-full h-full"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              title="Présentation CAP FUTURE MAROC"
-            />
+          {isPlaying ? (
+            /* === HTML5 Video Player === */
+            <video
+              src={videoSrc}
+              controls
+              autoPlay
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+            </video>
           ) : (
             /* === Placeholder / Thumbnail === */
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0B1F3A] via-[#112548] to-[#0B1F3A] flex flex-col items-center justify-center cursor-pointer"
-              onClick={() => {
-                if (videoEmbedUrl) setIsPlaying(true)
-              }}
+            <div
+              className="absolute inset-0 bg-gradient-to-br from-[#0B1F3A] via-[#112548] to-[#0B1F3A] flex flex-col items-center justify-center cursor-pointer select-none"
+              onClick={() => setIsPlaying(true)}
             >
               {/* Decorative orbs */}
               <div className="absolute inset-0 pointer-events-none">
@@ -61,22 +62,20 @@ export default function VideoSection() {
 
               {/* Play button */}
               <div className="relative z-10 flex flex-col items-center gap-5">
-                <div className="w-20 h-20 rounded-full bg-[#E8871A] flex items-center justify-center shadow-[0_0_60px_rgba(232,135,26,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_80px_rgba(232,135,26,0.4)] transition-all duration-500">
+                <div className="w-20 h-20 rounded-full bg-[#E8871A] flex items-center justify-center shadow-[0_0_60px_rgba(232,135,26,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_80px_rgba(232,135,26,0.5)] transition-all duration-500">
                   <Play className="w-8 h-8 text-white ml-1" fill="white" />
                 </div>
 
                 <div className="text-center">
-                  <p className="text-white font-semibold text-sm mb-1">
-                    {videoEmbedUrl
-                      ? 'Cliquez pour lancer la vidéo'
-                      : 'Vidéo bientôt disponible'}
+                  <p className="text-white font-semibold text-base mb-1">
+                    Cliquez pour lancer la vidéo
                   </p>
-                  <p className="text-white/30 text-xs">30 – 45 secondes</p>
+                  <p className="text-white/40 text-xs">Présentation CAP FUTURE MAROC</p>
                 </div>
               </div>
 
               {/* Corner badge */}
-              <div className="absolute bottom-4 right-4 bg-white/[0.06] backdrop-blur-sm border border-white/[0.1] rounded-lg px-3 py-1.5 text-[11px] text-white/40 font-medium">
+              <div className="absolute bottom-4 right-4 bg-white/[0.06] backdrop-blur-sm border border-white/[0.1] rounded-lg px-3 py-1.5 text-[11px] text-white/60 font-medium">
                 🎓 CAP FUTURE MAROC
               </div>
             </div>
@@ -84,10 +83,11 @@ export default function VideoSection() {
         </motion.div>
 
         {/* Caption */}
-        <p className="text-center text-xs text-white/25 mt-4">
-          Découvrez notre approche en quelques secondes.
+        <p className="text-center text-xs text-white/30 mt-4">
+          Découvrez notre démarche et nos services d&apos;orientation personnalisée.
         </p>
       </div>
     </section>
   )
 }
+
