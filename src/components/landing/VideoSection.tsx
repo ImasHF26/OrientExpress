@@ -1,14 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Play } from 'lucide-react'
-import { useState } from 'react'
+import { Volume2, VolumeX } from 'lucide-react'
+import { useState, useRef } from 'react'
 
 export default function VideoSection() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   // Local video file in public directory
   const videoSrc = '/BAC_2 UPDATED.mp4'
+
+  const toggleSound = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
+    }
+  }
 
   return (
     <section className="bg-[#0d2340] py-20 sm:py-24 border-t border-white/[0.04]">
@@ -35,51 +43,41 @@ export default function VideoSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="relative aspect-video rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-black/30 group bg-black"
+          className="relative aspect-video rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-black/40 bg-black group"
         >
-          {isPlaying ? (
-            /* === HTML5 Video Player === */
-            <video
-              src={videoSrc}
-              controls
-              autoPlay
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
-            </video>
-          ) : (
-            /* === Placeholder / Thumbnail === */
-            <div
-              className="absolute inset-0 bg-gradient-to-br from-[#0B1F3A] via-[#112548] to-[#0B1F3A] flex flex-col items-center justify-center cursor-pointer select-none"
-              onClick={() => setIsPlaying(true)}
-            >
-              {/* Decorative orbs */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] bg-[#E8871A]/8 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-[150px] h-[150px] bg-[#E8871A]/5 rounded-full blur-3xl" />
-              </div>
+          {/* Direct HTML5 Autoplay Video */}
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            autoPlay
+            muted={isMuted}
+            loop
+            playsInline
+            controls
+            className="w-full h-full object-contain mx-auto bg-black"
+          >
+            Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+          </video>
 
-              {/* Play button */}
-              <div className="relative z-10 flex flex-col items-center gap-5">
-                <div className="w-20 h-20 rounded-full bg-[#E8871A] flex items-center justify-center shadow-[0_0_60px_rgba(232,135,26,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_80px_rgba(232,135,26,0.5)] transition-all duration-500">
-                  <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                </div>
-
-                <div className="text-center">
-                  <p className="text-white font-semibold text-base mb-1">
-                    Cliquez pour lancer la vidéo
-                  </p>
-                  <p className="text-white/40 text-xs">Présentation CAP FUTURE MAROC</p>
-                </div>
-              </div>
-
-              {/* Corner badge */}
-              <div className="absolute bottom-4 right-4 bg-white/[0.06] backdrop-blur-sm border border-white/[0.1] rounded-lg px-3 py-1.5 text-[11px] text-white/60 font-medium">
-                🎓 CAP FUTURE MAROC
-              </div>
-            </div>
-          )}
+          {/* Sound Control Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleSound}
+            className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-black/70 hover:bg-[#E8871A] text-white backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 shadow-xl cursor-pointer"
+            title={isMuted ? 'Activer le son' : 'Désactiver le son'}
+          >
+            {isMuted ? (
+              <>
+                <VolumeX className="w-4 h-4 text-[#E8871A] group-hover:text-white" />
+                <span>Activer le son</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="w-4 h-4 text-emerald-400 group-hover:text-white" />
+                <span>Son activé</span>
+              </>
+            )}
+          </button>
         </motion.div>
 
         {/* Caption */}
@@ -90,4 +88,5 @@ export default function VideoSection() {
     </section>
   )
 }
+
 
