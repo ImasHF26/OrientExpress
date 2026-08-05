@@ -37,13 +37,13 @@ export default function VideoSection() {
           </h2>
         </motion.div>
 
-        {/* Video container */}
+        {/* Video container tailored for 9:16 vertical video */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="relative aspect-video rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-black/40 bg-black group"
+          className="relative max-w-[360px] sm:max-w-[400px] aspect-[9/16] mx-auto rounded-3xl overflow-hidden border border-white/[0.12] shadow-[0_0_60px_rgba(0,0,0,0.6)] bg-black group"
         >
           {/* Direct HTML5 Autoplay Video */}
           <video
@@ -54,7 +54,7 @@ export default function VideoSection() {
             loop
             playsInline
             controls
-            className="w-full h-full object-contain mx-auto bg-black"
+            className="w-full h-full object-cover rounded-3xl"
           >
             Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
           </video>
