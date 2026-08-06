@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     icon: "/logo-orientation.svg",
   },
   openGraph: {
-    title: "CAP FUTURE MAROC — Votre Master au Maroc, garanti ou remboursé.",
+    title: "CAP FUTURE MAROC — Accompagnement stratégique & admission en Master au Maroc",
     description:
-      "Nous analysons votre dossier au millimètre, sélectionnons uniquement les Masters et Écoles d'ingénieurs reconnus, et vous accompagnons jusqu'à l'admission.",
+      "Nous analysons votre dossier académique, sélectionnons les Masters et Écoles d'ingénieurs reconnus, et construisons la meilleure stratégie d'admission.",
     type: "website",
   },
 };

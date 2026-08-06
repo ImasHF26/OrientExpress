@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/config'
+import { trackCta } from '@/lib/analytics'
 
 export default function WhatsAppButton() {
+
   const [isVisible, setIsVisible] = useState(false)
   const [showTooltip, setShowTooltip] = useState(false)
 
@@ -64,7 +66,9 @@ export default function WhatsAppButton() {
         href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent("Bonjour, je souhaite réserver mon orientation.")}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackCta('whatsapp_floating', 'Discussion WhatsApp Flottante', 'WhatsAppButton')}
         initial={{ scale: 0 }}
+
         animate={{ scale: 1 }}
         transition={{ type: 'spring', damping: 15, stiffness: 200 }}
         className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-2xl hover:shadow-green-500/40 hover:scale-110 transition-all duration-300"

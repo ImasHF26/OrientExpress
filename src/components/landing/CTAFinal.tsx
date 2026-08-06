@@ -2,10 +2,14 @@
 
 import { motion } from 'framer-motion'
 
+import { trackCta } from '@/lib/analytics'
+
 export default function CTAFinal() {
   const scrollTo = (id: string) => {
+    trackCta('cta_final_reserve', 'Je réserve ma consultation CTAFinal', 'CTAFinal')
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
   }
+
 
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden bg-[#0B1F3A]">

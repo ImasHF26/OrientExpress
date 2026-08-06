@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/config'
 
+import { trackCta } from '@/lib/analytics'
+
 const navLinks = [
   { label: 'Accueil', href: '#hero' },
   { label: 'Orientation', href: '#consultation' },
@@ -23,8 +25,12 @@ export default function Navbar() {
 
   const scrollTo = (href: string) => {
     setIsMobileMenuOpen(false)
+    if (href === '#consultation') {
+      trackCta('nav_cta_reserve', 'Réserver ma consultation Navbar', 'Navbar')
+    }
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
+
 
   return (
     <>

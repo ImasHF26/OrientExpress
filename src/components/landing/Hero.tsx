@@ -3,10 +3,14 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 
+import { trackCta } from '@/lib/analytics'
+
 export default function Hero() {
   const scrollTo = (id: string) => {
+    trackCta('hero_cta_reserve', 'Je réserve ma consultation', 'Hero')
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
   }
+
 
   return (
     <section
