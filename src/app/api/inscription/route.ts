@@ -73,12 +73,12 @@ export async function POST(request: Request) {
   }
 }
 
-// GET: récupérer les inscriptions (pour dashboard futur)
+// GET: récupérer les inscriptions
 export async function GET() {
   try {
     const students = await db.student.findMany({
       orderBy: { createdAt: 'desc' },
-      take: 100,
+      take: 500,
     })
 
     return NextResponse.json({
@@ -92,5 +92,48 @@ export async function GET() {
       { success: false, error: 'Erreur serveur.' },
       { status: 500 }
     )
+  }
+}
+
+// PATCH: mettre à jour contacted ou notes d'un étudiant
+export async function PATCH(request: Request) {
+  try {
+    const body = await request.json()
+    const { id, contacted, notes } = body
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: 'ID requis.' }, { status: 400 })
+    }
+
+    const updated = await db.student.update({
+      where: { id },
+      data: {
+        ...(typeof contacted === 'boolean' ? { contacted } : {}),
+        ...(typeof notes === 'string' ? { notes } : {}),
+      },
+    })
+
+    return NextResponse.json({ success: true, data: updated })
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour:', error)
+    return NextResponse.json({ success: false, error: 'Erreur serveur.' }, { status: 500 })
+  }
+}
+
+// DELETE: supprimer un étudiant
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: 'ID requis.' }, { status: 400 })
+    }
+
+    await db.student.delete({ where: { id } })
+    return NextResponse.json({ success: true, message: 'Étudiant supprimé.' })
+  } catch (error) {
+    console.error('Erreur lors de la suppression:', error)
+    return NextResponse.json({ success: false, error: 'Erreur serveur.' }, { status: 500 })
   }
 }

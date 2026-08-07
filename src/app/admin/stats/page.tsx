@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
   BarChart3,
@@ -11,8 +12,7 @@ import {
   RefreshCw,
   PhoneCall,
   MapPin,
-  GraduationCap,
-  Clock,
+  LogOut,
 } from 'lucide-react'
 
 type StatsData = {
@@ -38,6 +38,7 @@ export default function AdminStatsPage() {
   const [stats, setStats] = useState<StatsData | null>(null)
   const [students, setStudents] = useState<Student[]>([])
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   const fetchData = async () => {
     setLoading(true)
@@ -62,33 +63,59 @@ export default function AdminStatsPage() {
     fetchData()
   }, [])
 
+  const handleLogout = async () => {
+    await fetch('/api/admin/auth', { method: 'DELETE' })
+    router.push('/admin/login')
+    router.refresh()
+  }
+
   return (
     <div className="min-h-screen bg-[#071527] text-white p-6 sm:p-10 font-sans">
       <div className="max-w-7xl mx-auto space-y-8">
-        {/* Top Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+        {/* Navigation Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs text-[#E8871A] hover:underline mb-2 font-semibold"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Retour à la landing page
-            </Link>
-            <h1 className="text-2xl sm:text-3xl font-bold font-display text-white flex items-center gap-2">
-              <BarChart3 className="w-7 h-7 text-[#E8871A]" /> Tableau de Bord Analytics & Leads
+            <div className="flex items-center gap-3 mb-1">
+              <span className="font-bold text-white text-xl font-sans">
+                CAP FUTURE <span className="text-[#E8871A]">MAROC</span>
+              </span>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#E8871A]/20 text-[#E8871A] font-bold">
+                Admin Panel
+              </span>
+            </div>
+            <h1 className="text-2xl font-bold font-display text-white flex items-center gap-2">
+              <BarChart3 className="w-6 h-6 text-[#E8871A]" /> Tableau de Bord Analytics & Conversions CTA
             </h1>
-            <p className="text-xs text-white/50">
-              Statistiques d&apos;engagement des CTA et suivi des candidatures Meta Ads
-            </p>
           </div>
 
-          <button
-            onClick={fetchData}
-            disabled={loading}
-            className="py-2.5 px-4 bg-white/5 hover:bg-white/10 text-white text-xs font-bold rounded-xl border border-white/10 transition-all flex items-center gap-2"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Actualiser
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/admin/stats"
+              className="py-2.5 px-4 bg-[#E8871A] text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center gap-2"
+            >
+              <BarChart3 className="w-4 h-4" /> Stats & CTA
+            </Link>
+            <Link
+              href="/admin/inscrits"
+              className="py-2.5 px-4 bg-white/5 hover:bg-white/10 text-white text-xs font-bold rounded-xl border border-white/10 transition-all flex items-center gap-2"
+            >
+              <Users className="w-4 h-4 text-[#E8871A]" /> Inscrits ({students.length})
+            </Link>
+            <button
+              onClick={fetchData}
+              disabled={loading}
+              className="p-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl border border-white/10 transition-all"
+              title="Actualiser"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            </button>
+            <button
+              onClick={handleLogout}
+              className="py-2.5 px-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold rounded-xl border border-red-500/20 transition-all flex items-center gap-1.5"
+            >
+              <LogOut className="w-4 h-4" /> Déconnexion
+            </button>
+          </div>
         </div>
 
         {/* Metrics Overview Cards */}
@@ -189,9 +216,17 @@ export default function AdminStatsPage() {
 
         {/* Dernières candidatures */}
         <div className="bg-[#0D2340] border border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            🎓 Dernières Candidatures d&apos;Étudiants Recueillies ({students.length})
-          </h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-bold text-white flex items-center gap-2">
+              🎓 Dernières Candidatures d&apos;Étudiants Recueillies ({students.length})
+            </h2>
+            <Link
+              href="/admin/inscrits"
+              className="text-xs font-bold text-[#E8871A] hover:underline flex items-center gap-1"
+            >
+              Gérer tous les inscrits →
+            </Link>
+          </div>
 
           {students.length > 0 ? (
             <div className="overflow-x-auto">
@@ -206,7 +241,7 @@ export default function AdminStatsPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {students.slice(0, 15).map((s) => (
+                  {students.slice(0, 10).map((s) => (
                     <tr key={s.id} className="hover:bg-white/5 transition-colors">
                       <td className="p-3 font-bold text-white">{s.nom}</td>
                       <td className="p-3">
